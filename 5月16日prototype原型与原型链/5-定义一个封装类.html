@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>定义一个封装类</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+      function Person(name,age){
+		  this.name=name;
+		  this.age=age;
+		  }
+	
+	Person.prototype={       //在此处把类给封装起来。
+		sayHello:function(name){
+			document.write( this.name+"说 hello to"+"&nbsp;&nbsp;"+name+"<br/>");
+			},         //此处必须加逗号
+	    sayBye:function(name){
+			document.write(this.name+"说 Bye to"+name+"<br/>");
+			}
+		}
+		
+		 var p1=new Person('张三',20);
+	     p1.sayBye("smith");        //在此处直接调用上面的sayBye函数
+		 
+		 Person.prototype.sayHello=function(name){
+			 document.write(this.name+"说 您好 给 "+ name+"<br/>");
+		}         //继承了Person原型的功能，对它进行了（重写）修改。
+		p1.sayHello("smith");
+		p1.sayBye("tom");
+		
+		
+		Person.prototype.eat=function(  food   ){   //对功能的重写
+		document.write( this.name+" 吃 "+ 	 food +"<br />");	
+	   }
+	   p1.eat("apple");
+	   p1.sayHello("apple");
+
+  </script>
+</body>
+</html>

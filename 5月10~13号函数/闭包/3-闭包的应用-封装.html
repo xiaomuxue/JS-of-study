@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3-闭包的应用-封装</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      //声明两个全局变量
+      var setAge,getAge;       //setAge和getAge都是全局变量
+	  
+	  (
+	     function(){
+		    var age=0;   //在一个函数的内部定义的属性在函数外无法直接访问
+			//这个全局变量引用一个闭包，在闭包中去访问这个函数中的属性
+			setAge=function(a){     //由于setAge是全局变量，故外面也可以调用a的值了；
+		         age=a;
+			};
+			getAge=function(){
+			   return age;
+			}
+		}
+	  )();
+	  
+	  document.write( getAge() +"<br/>");     //0  要想访问函数内部定义的属性，可以使用全局变量引用一个闭包，在闭包中访问函数中的属性，然后外面也可以调用内部属性的值，所以这里输出0
+	  setAge( 20);    
+	  document.write( getAge() );     
+   </script>
+</body>
+</html>

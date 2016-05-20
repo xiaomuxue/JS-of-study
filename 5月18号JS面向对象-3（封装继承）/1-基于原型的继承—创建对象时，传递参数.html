@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1-基于原型的继承—创建对象时，传递参数</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+         //定义父类
+	     function Animal(group,gender){
+		     //定义
+			 this.group=group;
+			 this.gender=gender;
+		}
+	    Animal.prototype.showInfo=function(){
+		   document.write("类别："+this.group+"性别："+this.gender+"<br/>");
+		}
+		
+		//Bird.prototype=new Animal(group,gender);   //希望实现的功能是这样的，但是不能这样调用；所以得使用以下方法调用Animal
+		//定义子类
+		function Bird(group,gender){
+		   //为了完成使用参数来创建 Animal 对象，可以使用 call()函数。
+		   //call 函数语法：   Object.call(要调用构造函数的对象， [实参数1，实参数2，.....])
+		   Animal.call(this,group,gender);  //this=new Animal("鸟类"，"雌");   =》  super( "鸟类","雌");    call可以把父类里面所有的功能都继承，来实现多继承。
+		}
+		
+		Bird.prototype=new Animal();
+		Bird.prototype.constructor=Bird;
+		
+		var b1=new Bird("鸟类","雌");
+        b1.showInfo();		
+    </script>
+</body>
+</html>

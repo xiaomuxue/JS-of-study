@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>倒金字塔</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       for(var i=6;i>0;i--){
+		   //空格数是跟行数相关的
+	     for(var j=6;j>i;j--){
+		   //控制空格数量的
+			 document.write("&nbsp;&nbsp;");
+		}
+		//控制笑脸
+			 for(var sum=0;sum<i;sum++){
+			   document.write("\u263a"+"&nbsp;&nbsp;");
+			}
+		document.write("<br/>");
+	   }
+   </script>
+</body>
+</html>

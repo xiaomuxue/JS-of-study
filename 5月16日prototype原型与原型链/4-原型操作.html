@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>原型操作</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+     //1、前面我们使用过prototype扩展Array,Objcet(内置函数)中的equals,clone,这样它们下面的对象就都有这些功能了；
+	 //自定义类也可以使用prototype来扩展
+	 function Person( name, age){
+		 //this指的是当前的对象的name       name指的是形参的name
+		//  最开始，this.name是空值   接着通过这句代码将name的实参值传到 this.name中保存
+		 this.name=name;
+		 this.age=age;
+		 }
+	 Person.prototype.sayHello=function(name){
+		  document.write("hello"+name+"<br/>");
+		 }      //这里会无法输出，因为被下面的属性覆盖了 
+	
+	//还可以通过prototype一次性扩展多个方法	 
+   Person.prototype={
+	   sayBye:function(name){
+		   document.write(this.name+"&nbsp;&nbsp;"+"say bye to"+"&nbsp;&nbsp;"+name+"<br/>");
+		   },
+		eat:function(foods){
+			document.write(this.name+" "+"eat"+" "+foods+"<br/>");
+			}
+	   };
+	   
+	   var p1=new Person('张三',20);
+	   //p1.sayHello("xiaoxue");    //sayHello is not a function
+	   p1.sayBye("smith");
+	   p1.eat('pear');
+	   
+	   
+	   
+	   Person.prototype.grade='一年级';     //这样做，这个类创建的所有的对象都会有相同值的属性.  这样不太好
+	  document.write(  p1.name+" "+ p1.grade  +"<br />" );
+	
+	  var p2=new Person("李四",30);
+	  document.write(  p2.name+" "+  p2.grade  +"<br />" );     //李四一年级         由于没有年龄这个属性，所以30并没有用，无法输出
+		 
+  </script>
+</body>
+</html>

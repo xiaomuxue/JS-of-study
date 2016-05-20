@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS的扩展</title>
+</head>
+
+<body>
+    <pre>
+       自带的只针对自身而言，例:pop(),slice(),splice(),等只针对Array
+       JS的扩展方法：indexOf(): 返回索引，去查找括号里面的参数的索引
+       从左往右开始查找，一旦找到，就会立即返回
+       所有在数组里面没有的值，它们的索引都是-1
+       两个参数：1、要找的值     2、从哪里开始找
+       lastIndexOf():从右往左
+    </pre>
+    <script>
+       var arr=[1,2,3,2,1,1,2];
+	   console.log( arr.indexOf(2) );   //1
+	   console.log( arr.indexOf(10));   //-1,  在数组里面没有的值，它们的索引都是-1
+	   console.log( arr.indexOf(1,1));     //4  从第一个找，找到1
+	   console.log( arr.indexOf(3,-3));  //-1 从倒数第三个往后找，里面没有3，故索引为-1
+	   console.log( arr.indexOf(2,-1));  //6  第一个指要找的值，第二个指从哪里开始找
+	   console.log( arr.lastIndexOf(2));   //6 从最后面查找
+	   console.log( arr.lastIndexOf(2,-2));  //3  从最后面的倒数第二个数开始找2，就是从顺数第二个找2
+    </script>
+</body>
+</html>

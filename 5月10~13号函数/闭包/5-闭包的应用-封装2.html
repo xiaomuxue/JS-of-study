@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>5-闭包的应用-封装2</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+      //需求：
+	  
+	  var person=( function(){
+	      var name='';      //首先给name 和 age一个默认值。
+		  var age=18;
+		  return {      //return 一个对象，把函数中的属性都封装起来。
+		     setName:function( n ){
+			      name=n;
+			},
+			setAge:function(a){
+				if( a<18){
+				   alert("年龄无效，必须在18以上");
+				}else{
+			        age=a;
+				}
+		    },
+			getName:function(){
+		         return name;
+			},
+			getAge:function(){
+			     return age;
+			},
+			toString:function(){
+			    return "姓名:"+name+"&nbsp;&nbsp;&nbsp;"+"年龄："+age;
+			}
+		  };
+	   })();
+	   
+	   person.setName("张三");
+	   person.setAge(-20);       //18并  alert()   在此处的年龄直接牵连到if循环里面的判断。
+	   
+	   document.write( person.getName()+"<br/>");
+	   document.write( person.getAge()+"<br/>");
+	   document.write( person.toString()+"<br/>");
+  </script>
+</body>
+</html>

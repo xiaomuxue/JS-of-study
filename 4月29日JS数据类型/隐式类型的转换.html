@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>隐形类型转换</title>
+</head>
+
+<body>
+  <script>
+      var i="100";
+	  alert(i+100);       //100100      变成了字符串    当使用加时，就会转换为字符串
+	 
+	 var i=100;
+	 alert(i-3);        //97     还是数字    
+	 alert(i-"3");      //97     还是数字
+	 alert(i+"3");      //1003   变成了字符串
+	 alert(i*3);        //300     还是数字
+	 alert(i*"3");       //300     还是数字
+	 
+	 var a="3";
+	 a++;
+	 alert(a);    //4    数字
+	 a--;
+	 alert(a);    //3    数字
+	 
+	 alert("3">2);     //true      布尔类型
+	  
+  </script>
+</body>
+</html>

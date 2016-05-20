@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1-闭包的应用bug_保存现场</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      /*function r(){
+	    var a=[];
+		for( var i=0;i<3;i++){
+	      a[i]=function(){
+		     return i*2;
+		  }
+		}
+		return a;
+	  }*/
+	  
+	  //闭包有三种不同的写法：1、外部函数     2、内部函数    3、匿名函数在内部的自调用
+	  //解决方案一：
+	  //外部函数
+	  /*function inner(x){
+	    return function(){
+	        return x;
+		}
+	  }
+	  function r(){
+	     var a=[];
+		 for(var i=0;i<3;i++){
+		    a[i]=inner(i*2);
+		}
+		return a;
+	 }*/
+	  
+	  
+	  
+	  //解决方案二：
+	/*  function r(){
+		  //内部函数,便于修改和维护
+	     function invoke(i){
+		    return function(){
+			    return i*2;	
+			}
+		 }
+		 var a=[];          //先声明数组
+		 for(var i=0;i<3;i++){
+		   a[i]=invoke(i);
+		}
+		return a;	  
+	}*/
+	
+	//解决方案三：
+	/*function r(){
+	   var a=[]; 
+	   for(var i=0;i<3;i++){
+	      a[i]=function(i){        //匿名自调用 ，优点：代码简洁和精简。
+		      return function(){
+			      return i*2;
+			   }
+		   }(i);     //这里必须得加括号激活，才能得到它的值。
+	   }
+	   return a;
+	}*/
+	
+	//第二种方案还可以这样写
+	function r(){
+		function inner(x){
+		   return function(){
+			   return x;
+			}
+		}
+		
+      var a=[];
+	  for(var i=0;i<3;i++){
+	    a[i]=inner(i*2);
+	  } 
+	  return a;
+	}
+	 
+	 
+	/* function r(){
+	    function inner(i){
+		   return i*2;
+		}
+	
+	var a=[];
+	for(var i=0;i<3;i++){
+       a[i]=inner(i);
+	}
+	   return a;
+	}*/       //这一段写法是错的
+		 
+	  var result=r(); 
+	  document.write(result[0]()+"<br/>"+result[1]()+"<br/>"+result[2]());
+   </script>
+</body>
+</html>

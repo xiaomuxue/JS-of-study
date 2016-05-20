@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>作用域二</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+   //请判断以下代码的输出值
+   var zhoujielun={
+       name:'周杰伦',
+	   gender:1
+   };
+       function class1(){
+		   var zhoujielun={
+		      name:'周杰伦',
+			  gender:0
+		   };
+		   zhoujielun.name="周杰";
+		   zhoujielun.gender=1;
+		} 
+		
+		class1();
+		alert( zhoujielun.name);
+		alert( zhoujielun.gender);
+   </script>
+</body>
+</html>

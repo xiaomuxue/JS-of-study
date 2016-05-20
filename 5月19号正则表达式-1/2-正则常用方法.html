@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2-正则常用方法</title>
+</head>
+
+<body>
+    <pre>
+         1、字符串判断test
+              regexp.test(字符串)      返回真假
+         2、字符串搜索search
+             字符串.search(regexp)      返回出现的位置
+         3、字符串匹配match
+              字符串.match(regexp)      返回数组
+         4、字符串替换replace
+              字符串.replace(regexp)     返回替换后的字符串
+              
+              \n    换行
+              \t    空格
+              \r    制表符
+              
+              正则里面的转义字符
+              
+              \s : 空格
+              \S : 非空格
+              \d : 数字
+              \D : 非数字
+              \w : 字符（字母，数字，下划线—）
+              \W ： 非字符
+    </pre>
+    <script type="text/javascript">
+          //test的简单应用(test:判断字符串里面是否匹配到正则，能够，返回true,不能，返回false)
+		  
+		  var str="abcde";
+		  //定义一个正则，用来匹配字符串b
+		  var reg=/b/;
+		  console.log( reg.test(str));      //true
+		  
+		  var str1="123456m789";
+		  var reg1=/\D/;     //这里加了\D指非数字的值
+		  if(reg1.test(str1)){
+		      alert("不全是数字");
+		  }else{
+		      alert("全是数字");
+		  } 
+		  
+		  
+		  //search:返回匹配到的位置(位置第一个从0开始)
+		  var str="abcdefg";
+		  var reg=/b/;
+		  console.log( str.search(reg));     //1    返回的值为1
+		  
+		  var reg=/bcdef/;
+		  console.log( str.search(reg));    //1
+		  
+		  var reg=/B/;    
+		  console.log( str.search(reg));    //因为里面不存在B，故输出-1.
+		  
+		  var reg=/B/i;     //附加参数i： 不区分大小写进行匹配
+		  console.log( str.search(reg));    //因为加了i，不区分大小写，故输出1.
+		  
+		  
+		  
+		  
+		  //match:返回匹配到的数组   默认情况下：对于正则而言，只要匹配成功，就会返回，不会往下执行了。
+		  var str="a1bc2356d45ef123g";
+		  var reg=/\d/;      //返回第一个数字
+		  console.log( str.match(reg));     //1
+		  
+		  var reg=new RegExp("\\d","g");    //在字符串里面，反斜杠需要转义。     g:全局变量匹配，它会全部进行匹配，返回全部匹配到的数据
+		  console.log( str.match(reg));     //把数字一个个的单独输出来
+		  
+		  //量词+： 代表\d至少出现一次，最多无限次
+		  // \d+   -->   \d  \d\d  \d\d\d
+		  var reg=/\d+/g;       //在后面必须加g，少了全局变量，就只会输出1，就结束了。
+		  console.log( str.match(reg));    //把数字在一起的一起输出来
+		  
+		
+	  //replace替换  
+	  
+	   var str="aaa";
+	   console.log("替换前："+str);
+	   var reg=/a/;       //不加全局，就只能更改一个
+	   str=str.replace(reg,"b");
+	   console.log("替换后:"+str);    //baa
+	   
+	   var str="aaa";
+	   console.log("替换前："+str);
+	   var reg=/a/g;     //此处多加了个g，说明全局替换，全部都可以改变，故后面输出bbb
+	   str=str.replace(reg,"b");
+	   console.log("替换后:"+str);   //bbb
+    </script>
+</body>
+</html>

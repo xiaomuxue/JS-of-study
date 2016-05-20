@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>自定义一个圆的类</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+     //定义一个Circle类，有一个半径的属性，和两个方法（计算周长，面积)
+     function Cricle(r){
+	    this.r=r;
+	}
+	
+	//定义一个PI, 静态成员
+	Cricle.PI=3.14;
+	Cricle.prototype={     //把圆的属性都封装起来
+	    perimeter:function(){
+		   return 2*this.r*this.r*Cricle.PI;
+		},
+		area:function(){
+		   return this.r*this.r*Cricle.PI;
+		}
+	}
+	
+	
+	 //创建一个圆的对象
+	var c=new Cricle(4);
+	document.write("半径为："+c.r+"的圆，的面积为："+c.area()+'<br/>');
+	
+	document.write("半径为："+c.r+"的圆，的周长为："+c.perimeter()+"<br/>");
+  </script>
+</body>
+</html>

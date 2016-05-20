@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数组的综合练习题</title>
+</head>
+
+<body>
+   <script>
+      var arr=[1,2,3,'4','3',5,2,5];
+	  arr.sort();   //先进行排序,保证arr的顺序
+	  var x=[arr[0]];  //  ->  x=[1]
+	  for(var i=0;i<arr.length;i++){
+		//如果arr里面有，而里面没有，则添加到x里面去
+	     if(arr[i]!=x[x.length-1]){
+			 //没有的值，则添加进去
+		    x.push(arr[i]);
+		 }
+	 }
+	document.write(x+"<br/>");
+	
+	arr.sort();   //先进行排序,保证arr的顺序
+	  var x=[arr[0]];  //  ->  x=[1]
+	  for(var i=0;i<arr.length;i++){
+		//如果arr里面有，而里面没有，则添加到x里面去
+	     if(arr[i]!==x[x.length-1]){
+			 //没有的值，则添加进去
+		    x.push(arr[i]);
+		 }
+	 }
+	document.write(x+"<br/>");
+	
+	
+	//第二种方法
+	var x=[];
+	for(var i=0;i<arr.length;i++){
+	   //在x数组里面循环的找值，找arr数组里面的值，如果没有，则添加进去
+	   if(x.indexOf(arr[i])==-1){
+		  x.push(arr[i]);
+		} 
+	}
+	console.log(x);
+	
+   </script>
+</body>
+</html>

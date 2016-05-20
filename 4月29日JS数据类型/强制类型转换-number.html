@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>强制类型转换-number</title>
+</head>
+
+<body>
+    <script>
+        var i="100";
+		alert( typeof(Number(i)));       //强制类型转换     非常明确最终是要转换成什么类型
+		i="-100";                         //-100
+		alert( typeof(Number(i)));          
+		i="  ";                            //0
+		alert( typeof(Number(i)));
+		i="";                              //0
+		alert( typeof(Number(i)));
+		i=true;                           //1
+		alert( typeof(Number(i)));
+		i=false;                           //0
+		alert( typeof(Number(i)));
+		i=null;                             //0
+		alert( typeof(Number(i)));
+		i="123abc";                        //NaN
+		alert( typeof(Number(i)));
+		i;      //在JS里面，如果一个变量已经定义了，那么你重新定义，但是不赋值的话，不会被改变的       //NaN
+		alert( typeof(Number(i)));
+		i="abc123";                          //NaN
+		alert( typeof(Number(i)));
+		
+		
+		i="123";
+		alert(parseInt(i));
+		
+		i="123";
+		alert(typeof(parseInt(i)));
+		
+		i="123.456";
+		alert( parseInt(i));       //123
+		alert( parseFloat(i));
+		alert(Number(i));          //123.456
+		
+		i="";
+		alert(parseInt(i));        //NaN
+		i="123a456";     //如果前面有数字，后面是字符串，那么，返回前面的数字
+		alert(parseInt(i));      //123
+		i="a123456";    //如果前面没有数字，直接返回NaN
+		alert(parseInt(i));      //NaN
+		
+		i=true;
+		alert(parseInt(i));     //NaN
+		alert(parseFloat(i));     //NaN
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>for结合break和continue一起使用</title>
+</head>
+
+<body>
+   <pre>
+       语法：
+    在while、for、do....while、while循环中使用break语句退出当前循环，直接执行后面的代码
+    
+
+   for(初始条件；循环的判断条件；变量的值改变)｛
+      If(特殊情况)｛
+          break;
+      ｝
+       循环语句
+  ｝
+
+continue的作用是仅仅跳过本次循环，而整个循环体继续执行。
+for(初始条件；循环的判断条件；变量的值改变)｛
+   if(特殊情况)｛
+      continue；
+   ｝
+   循环语句
+｝
+
+   </pre>
+   
+   
+   <script>
+       for(var i=0;i<=10;i++){
+		   if(i==5){
+		      break;       //这个指到5时直接跳出
+			// continue;       //到5继续执行，也就是说跳过5
+		   }
+		   document.writeln(i);        //document.writeln指字表付的间隔（其实就是空格）
+		}
+           document.write("aaaaa");
+   </script>
+</body>
+</html>

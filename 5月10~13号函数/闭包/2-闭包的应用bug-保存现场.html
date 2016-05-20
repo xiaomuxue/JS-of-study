@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2-闭包的应用-bug-保存现场</title>
+</head>
+
+<body>
+   <script tyep="text/javascript">
+       var arr=["apple","pear","banana"];
+	   var innerArray=new Array();     //创建一个新的数组
+	   
+	  /* for(var i=0;i<arr.length;i++){
+		  var item=arr[i];
+	      innerArray[i]=function(){
+	      document.write( item+"<br/>");
+	      }
+	   }*/
+	   
+	   
+	   //解决方案一：外部函数或函数工厂
+	   /*function write(item){
+		   return function(){
+			   document.write(item+"<br/>")
+			}
+		}
+	   for(var i=0;i<arr.length;i++){
+		   var item=arr[i];
+		   innerArray[i]=write(item);
+		}*/
+	   
+	   
+	   //解决方案二：也可以使用自调用的匿名函数完成
+	   for(var i=0;i<arr.length;i++){
+	      var item=arr[i];
+		  innerArray[i]=( function(item){
+		        return function(){
+			        document.write(item+"<br/>");
+				}
+		 })(item);      //内部函数的自调用
+	   }
+	   
+	   
+	   for(var i=0;i<innerArray.length;i++){
+	      innerArray[i]();     //如果少了后面的括号，输出的将会是一段代码。
+	   }
+	   
+	   
+   </script>
+</body>
+</html>

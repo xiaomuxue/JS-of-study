@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>字符串和数组结合的小练习</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       //练习：请输入一串字符串里面所有的数字，如果数字相连，那么输出的时候数字也应该相连。
+	   //要求：找出字符串里面所有的数字，如果数字相连，则输出相连的数字
+	   var str="a32b321cd44231ef321gh45ij6k18mn987";
+	   
+	   function findNum(str){
+	     //定义返回数组
+		 var arr=[];
+		 //定义临时变量
+		 var temp="";
+		 
+		 for(var i=0;i<str.length;i++){
+	        //数字必然大于0，小于9
+			if(str.charAt(i)<='9' && str.charAt(i)>='0'){
+			    temp+=str.charAt(i);    //str.charAt(i)指从索引为i的位置处，获取正确的字符。
+			}else{
+			    //假如temp是空，那么久没必要存到数组里面去
+				if(temp){
+				   arr.push(temp);
+				   //temp清空
+				   temp="";
+				}
+			}
+		 }
+		 //用于处理最后是数字的情况
+		 if(temp){
+		   arr.push(temp);
+		   //temp清空
+		   temp="";
+		}
+		return arr;
+	   }
+	   
+	   
+	   //以上那一大段，用这句话就可以实现；
+	   function findNumByReg(str){
+	        return str.match(/\d+/g);     //返回数组中的所有数字，并且在一起的一起返回。
+	   }
+	   
+	   document.write( findNum(str)+"<br/>");
+	   document.write( findNumByReg(str)+"<br/>");
+   </script>
+</body>
+</html>

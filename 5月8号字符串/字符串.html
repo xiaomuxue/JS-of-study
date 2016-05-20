@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>字符串</title>
+</head>
+
+<body>
+    <pre>
+        xxxx.xxx     什么.什么       属性
+        xxxx.xxx()   什么.什么（）    方法
+    </pre>
+    <script>
+       var str="abcde";
+	   console.log(str.length);
+	   
+	   var str="abcdedcba";
+	       //str.indexOf();如果第二个值取负数，就说明从索引值为0的数开始从左往右查找
+	   console.log( str.indexOf("c",-4));
+	   //str.lastIndexOf();如果第二个值取负数，就说明从索引值为0的数开始从右往左找
+	   console.log( str.lastIndexOf("c",-4));
+	   
+	   var str2="fpc";
+	   console.log( str.concat(str2));
+	   
+	   console.log( str.slice(2,5));   //从索引值为2开始取值，到5结束
+	   
+	   console.log( str.sub());        //
+	   console.log( str.substr(2,4));   //从索引值为2开始取值，一共截取4个结束
+	   console.log( str.substring(2,4));    //从索引值为2开始截取，截取到第4个值
+	   
+	   var str="a1b1c1";
+	   str=str.replace("c","e");
+	   console.log(str);
+	   
+	   var x=str.split("1");     //   ->   join()
+	   console.log(x);  
+    </script>
+</body>
+</html>

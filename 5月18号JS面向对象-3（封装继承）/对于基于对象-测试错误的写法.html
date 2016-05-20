@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>对于基于对象-测试错误的写法</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       function Person(name,sal){
+	      this.name=name;
+		  this.sal=sal;
+		  function toString(){
+		     return "姓名："+this.name+"工资："+this.sal;     //这样就行成了私有的成员了，无法调用它
+		  }
+		  function work(){
+		     document.write(this.name+"开始工作"+"<br/>");
+		  }
+	   }
+	   
+	   function Emp(name,sal,no){
+	        Person.call(this,name,sal);
+		    this.no=no;
+	  }
+	  
+	  Emp.prototype=new Person();
+		Emp.prototype.constructor=Emp;
+		
+		
+		Emp.prototype.toString=function(){
+		   return "姓名："+this.name+"工资："+this.sal+"编号："+this.no;
+		}
+		
+		var emp=new Emp("张三",2000,1);
+		document.write( emp.toString());
+	   
+   </script>
+</body>
+</html>

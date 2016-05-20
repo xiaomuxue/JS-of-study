@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>5-基于原型继承的缺点及改进</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       //基于原型继承的问题在于：当定义子类的原型，必须显示地调用父类的构造函数，如果是父类的构造函数，如果父类的构造函数代码耗时，或有破坏性，或程序运行的状态，那就有问题了。
+	   //问题的核心就在于它new了.........Bird.prototype=new Animal();
+	   function Shape(){ }   //和之前的functiton XX(xx,xx){}区别：属性没有写在括号里，而是写到了原型链中，但是这样也有一个缺点：就是会随着子类属性的更改而更改。
+	       Shape.prototype.name='形状';     //属性最好不要写在原型链里面
+		   Shape.prototype.toString=function(){return this.name;}    //方法可以定义在父类原型链里面。
+
+	   
+	   //2D图形继承Shape
+	   function TwoDShape(){ }
+		   TwoDShape.prototype=Shape.prototype;    //重点：将父类的原型赋值给子类的prototype，只继承它的功能，并不调用它（父类）；
+		   TwoDShape.prototype.constructor=TwoDShape;     //激活父类的功能给子类用
+		   TwoDShape.prototype.name='2D形状';    //添加子类的属性，可添加多个
+	
+	   
+	   //三角形继承了2DShape
+	   function Triangle(bottom,height){
+	       this.bottom=bottom;
+		   this.height=height;
+	   }
+	   Triangle.prototype=TwoDShape.prototype;
+	   Triangle.prototype.constructor=Triangle;
+	   Triangle.prototype.getArea=function(){
+		    return this.bottom*this.height/2;
+		}
+		//测试
+		var a=new Triangle(3,4);      //在这里给它传递参数值，可更改。
+		document.write( a.getArea()+"<br/>");
+		document.write( a.name+"<br/>");
+		
+		var s=new Shape();
+		document.write( s.name+"<br/>");
+		
+		var t=new TwoDShape();
+		document.write( t.name+"<br/>");
+		
+		//属性也变成了prototype链中的成员，这样只要原型链中发生任何一次更改（修改），则继承体系都会修改。
+		
+	   
+   </script>
+</body>
+</html>

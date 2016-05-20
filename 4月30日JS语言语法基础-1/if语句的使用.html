@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var money=10;
+           if(money>5);{
+           	alert("土豪")；
+           }else{
+           	alert("穷屌丝")；
+           }
+
+           if(2){             //其实，条件都自动调用了一次Boolean()
+           	  alert("真");         //2是真
+           }else{
+           	alert("假");     
+           }
+
+           if(0){
+              alert("真");
+           }else{
+           	alert("假");      //0是假
+           }
+
+
+           var grade=68;
+           if(grade>90){
+           	 alert("优秀");
+           }else if(grade>80){
+             alert("良");
+           }else if(grade>70){
+           	   alert("中");
+           }else if(grade>60){
+           	alert("及格");           //输出，然后不会再往后执行else
+           } else if(grade<60){
+           	alert("不及格");
+           }
+            
+	</script>
+</body>
+</html>

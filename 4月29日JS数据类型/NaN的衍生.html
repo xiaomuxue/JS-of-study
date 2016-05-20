@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>NaN的衍生</title>
+</head>
+
+<body>
+    <script>
+       var a=Number("abc");
+	   //alert(a);
+	   //typeof(a);
+	   if(a){
+		   alert("NaN是真");
+		   }else{
+			 alert("NaN是假");           //   NaN是假
+			   }
+			  alert(Boolean(a));        //false
+			  
+		   //比较
+		   alert(2=="2");           //true      ==只会比较数值
+		   alert(0==false);        //true    
+		   alert(2==="2");         //false       ===不仅比较值，还会比较类型
+		   alert(a==a);           //false
+		   alert(a===a);          //false    NaN连自己都不相等
+		   
+		   //NaN的衍生方法    is not a number  是不是   不是一个数字的数字类型
+		   //简单的说：就是判断你是不是NaN   ->  是不是一个数字
+		   alert( isNaN(123));        //false
+		   alert( isNaN("abc"));      //true
+		   
+		   document.write( null=="null");            //false
+		   document.write( null==undefined);         //true
+    </script>
+</body>
+</html>

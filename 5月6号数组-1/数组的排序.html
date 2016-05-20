@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数组排序</title>
+</head>
+
+<body>
+   <script>
+      var arr=new Array(3,8,9,4,6,2,1);
+	  document.write("排序前的数组："+arr+"<br/>");
+	  arr.sort();    //会默认替换掉原先的数组
+	  document.write("排序后的数组："+arr+"<br/>");
+	  
+	  document.write("<br/>");
+	  
+	  var arr=new Array(50,10,51,1,100);
+	  document.write("排序前的数组："+arr+"<br/>");
+	  arr.sort();
+	  document.write("排序后的数组："+arr+"<br/>");  
+	  //先比较最高位，最高位相同的，再比较后面的。
+	  
+	  document.write("<br/>");
+	  
+	  var arr=new Array("a","e","c","b","d");
+	  document.write("排序前的数组："+arr+"<br/>");
+	  arr.sort();
+	  document.write("排序后的数组："+arr+"<br/>"); 
+	  
+	  document.write("<br/>");
+	  
+	  var arr=new Array("张三","李四","王麻子","赵六","王八");
+	  document.write("排序前的数组："+arr+"<br/>");
+	  arr.sort();
+	  document.write("排序后的数组："+arr+"<br/>");
+	  
+	  document.write("<br/>");
+	  
+	 /* Array.sort([排序规则函数])   ->  排序规则函数   必须要有一个值a
+	  a>0   那么，这两个数值就会调换
+	  a<0   那么，不会调换
+	  a=0  */
+	  
+	  var arr=new Array(52,15,51,5,157);
+	  document.write("排序前的数组："+arr+"<br/>");
+	  //      参数   代码
+	  arr.sort(function(a,b){return a<b?1:-1 });   
+	  //若是把a<b改为a>b则为从小到大排序
+	  document.write("排序后的数组："+arr+"<br/>");
+	  document.write("<br/>");
+	  
+	  var a=[1,57,456,78,2,34,98,45,1235,7,34,8];
+	  document.write("排序钱的数组："+a+"<br/>");
+	    //取随机数，范围[0-1)   ->   [2-12)
+		//大于0，则调换，小于0，则不调换
+	  a.sort(function(a,b){ return Math.random()-0.5});  //随机排序
+	  document.write("排序后的数组："+a+"<br/>");
+	  document.write("<br/>");
+	  
+	  //倒序
+	  var arr=new Array(3,9,1,5,7);
+	  document.write("排序前的数组："+arr+"<br/>");
+	  arr.reverse();        //颠倒顺序，还可以是    arr.sort(function(a,b){return 1});或arr.sort(function(a,b){return Math.random(0.5)});
+	  document.write("排序后的数组："+arr+"<br/>");
+	  document.write("<br/>");
+	  
+	  
+   </script>
+</body>
+</html>

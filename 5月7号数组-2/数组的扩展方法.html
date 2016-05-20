@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数组的扩展方法</title>
+</head>
+
+<body>
+   <pre>
+      数组的扩展方法：indexOf();  lastIndexOf();   求索引，求一个值的索引
+   </pre>
+   <script>
+       var arr=[1,2,3,4,5];
+	   arr.forEach(function(x,index,a){
+		   //x也就是第一个值指数组的值   index第二个值指索引    a第三个值指数组本身
+	      console.log(x+"|"+index+"|"+a);
+	  });
+	  
+	  for(var i=0;i<arr.length;i++){
+	     arr[i];  i;  arr;
+	}
+	//document.write(arr[i]+"---"+i+"---"+arr+"<br/>");
+   </script>
+   
+   数组的扩展方法： map();   映射
+   <script>
+      var arr=[1,2,3];
+	  var arr2=arr.map(function(x){
+		 //返回，一旦return掉，那么这个function将不会再往下执行
+	     return  x*2+10;
+	 });
+	 console.log(arr2);
+   </script>
+   
+   数组的扩展方法：some()/every()    ->     逻辑运算符的  或   与
+   <script>
+      var arr=[2,4,6,8,10];
+	  var a=arr.some(function(x){
+		 return x>8; 
+	  });
+	  var b=arr.every(function(x){
+		return x>8;  
+	});
+	console.log(a+"----"+b);
+   </script>
+   
+   数组的扩展方法：filter    过滤
+   <script type="text/javascript">
+       var arr=[1,2,3,4,5,6,7,8,9,10];
+	   //返回boolean  如果返回true,则代表通过过滤，否，不通过
+	   var arr2=arr.filter(function(x,index){
+	      //如果索引值能够被3整除，或者值大于8，则返回真，输出
+		 return index%3==0 || x>8;
+	  });
+	  console.log(arr2);
+   </script>
+   数组的扩展方法：reduce/reduceRight    归一         reduceRight取值方向与reduce相反
+   <script>
+      var arr=[1,2,3,4];
+	  //求和                        以前的    现在的   索引  数组
+	  var sum=arr.reduce(function(previous,current,index,array){
+		 // console.log(previous+"----"+current+"-----"+index+"----"+array);
+		 return previous+current;     //开始时previous和current都没值，所以一开始得取出两个值
+	});
+	console.log(sum);
+   </script>
+</body>
+</html>

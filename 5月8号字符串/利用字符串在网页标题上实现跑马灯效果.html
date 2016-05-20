@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title><!--字符串的练习（网页标题上实现跑马灯效果）--></title>
+</head>
+
+<body>
+   <script>
+   
+  // 方法一：字符串
+      /*var str="* * * 欢 迎 进 入 * * *";
+	  var arr=str.split(" ");
+	  function run(){
+	      //   *   * * 欢 迎
+	     var s=arr.shift();   
+	     arr.push(s);
+	     document.title=arr.join(" ");
+	  }
+	  //字符串
+	  window.setInterval("run()",300);   */  //每1秒执行一次方法
+	  
+  //方法二：  数组
+     var arr1=['*','*','*','欢','迎','进','入','*','*','*'];
+	 function run(){
+	    var s=arr1.shift();
+		arr1.push(s);
+		document.title=arr1.join(" ");
+	}
+	window.setInterval("run()",300);
+	 
+    
+   </script>
+</body>
+</html>

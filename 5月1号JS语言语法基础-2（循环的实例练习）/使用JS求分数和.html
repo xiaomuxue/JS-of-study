@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>使用JS求分数之和</title>
+</head>
+
+<body>
+   <script>
+      var a=2.00;            //分子
+	  var b=1.00;           //分母
+	  var sum=0.00;
+	  var i=1;
+	  var temp=0.00;
+	  while(i<=20){
+		  //和的累积
+	    sum=sum+a/b;
+		//两个值的替换
+		temp=a;
+		a=a+b;
+		b=temp;
+		i++;            
+	}
+	//alert("前20项之和为："+sum);      //32.66
+	
+	document.write("前20项之和为："+sum);
+   </script>
+</body>
+</html>

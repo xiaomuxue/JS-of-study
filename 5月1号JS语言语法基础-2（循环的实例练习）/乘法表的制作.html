@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS做的乘法表</title>
+</head>
+
+<body>
+  <pre>
+      
+  
+  </pre>
+  
+  
+  
+   <script type="text/javascript">
+      var i=2;
+	  var j=1;
+	  var temp;              //临时变量，用来存放变量的值
+	  while(i<10){
+	      document.write(i+"*"+i+"="+(i*j)+"<br/>");
+		  temp=j;
+		  j=i;
+		  i=j;
+		  i++;	  
+	}
+	
+	
+document.write("<br/>");
+	
+/*	var i=1;                  //控制行数
+	var j=1;                  //列数
+	while(i<10){
+	   document.write("i:"+i+"<br/>");
+	   while(j<=i){
+		  document.write("j:"+j+"<br/>");
+		  j++;   
+	   }	
+	   i++;
+	   j=1;                 //变量重新定义
+	}*/
+	
+	
+	
+	var i=1;
+	var j=1;
+	while(i<10){
+	  while(j<=i){
+	     document.write(i+"*"+j+"="+(i*j)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		 j++;
+	  }	
+	  i++;
+	  j=1;                 //重置列数
+	  document.write("<br/>")
+	}
+	
+	document.write("<br/>");
+	
+	var i=1;
+	var j=1;
+	do{
+	  do{
+	    document.write(i+"*"+j+"="+(i*j)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		j++;
+	  }while(j<=i);
+	  i++;
+	  j=1;
+	  document.write("<br/>");
+	}while(i<10);
+	
+	   
+   </script>
+</body>
+</html>

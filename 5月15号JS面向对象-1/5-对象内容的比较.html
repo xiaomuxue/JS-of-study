@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>5-对象内容的比较</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      Object.prototype.equals=function(obj){
+	       //TODO：完成   当前对象this与obj对象的内容比较操作
+		  var result=false;
+		  if(!obj){
+		      return result;
+		  }
+		  //循环obj中所有的成员
+		  for(var  key in obj){       //成员
+		     if( !obj[key] || !this[key] || obj[key]!=this[key]){
+			        return result;
+			}
+		  }
+		  for(var key in this){
+		     if( !obj[key] || !this[key] || obj[key]!=this[key]){
+			      return result;
+			}
+		  }
+		  result=true;
+		  return result;
+	  }
+	  
+	  var a={name:'zy',age:20,sex:'male'};      //所有的对象都继承自  Object
+	  var b={name:'smith',age:23};
+	  
+	  document.write(a==b+"  ");               //使用  ==  比，比较的是地址
+	  
+	  document.write( a.equals(b)+"<br/>");
+	  
+	  Object.prototype.clone=function(){
+	     //循环当前对象this中所有的属性，存到一个新的对象newobj
+		 var newobj={};
+		 for(var key in this){
+		   newobj[key]=this[key];
+		 }
+			return newobj;
+	}
+	
+	var newA=a.clone();
+	newA.name='tom';
+	document.write( a.name+"&nbsp;&nbsp;&nbsp;"+a.sex+"&nbsp;&nbsp;&nbsp;"+a.age+"&nbsp;&nbsp;&nbsp;"+"<br/>");     //zy
+	document.write( newA.name+"&nbsp;&nbsp;&nbsp;"+newA.sex+"&nbsp;&nbsp;&nbsp;"+newA.age+"&nbsp;&nbsp;&nbsp;"+"<br/>");  //tom
+   </script>
+</body>
+</html>

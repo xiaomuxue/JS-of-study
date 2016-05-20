@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>继承object的toString()</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+     var num=new Number(123);        //将123包装成一个  Number对象  
+	 document.write( num.toString()+" "+(typeof num)+"<br/>");
+	 
+	 document.write( (typeof 123)+"<br/>");     //number  
+	 
+	 document.write( num.valueOf()+"<br/>");     //取出一个对象中包装的值
+	 //valueOf函数方法是返回指定对象的原始值。
+	 
+	 //hasOwnProperty()判定一个对象中是否有某个属性
+	 var car={
+	    color:'red',
+		num:function(){
+		   alert(('run'));
+		}	 
+	}
+	 document.write( car.hasOwnProperty('color')+"<br/>"+car.hasOwnProperty('logo'));     //true    false
+  </script>
+</body>
+</html>

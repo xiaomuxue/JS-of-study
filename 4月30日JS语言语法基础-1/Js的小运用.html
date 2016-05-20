@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS的运用</title>
+</head>
+
+<body>
+   <form>
+      请输入密码：<input type="password" id="pwd" /><br/>
+      请再次输入密码：<input type="password" id="rpwd" /><br/>
+      请输入年龄：<input type="text" id="age"/><br/>
+      <input type="button" value="提交" onclick="show()"/>
+   </form>
+   
+   <script type="text/javascript">
+      function show(){
+	     var pwd=document.getElementById("pwd").value;
+		 var rpwd=document.getElementById("rpwd").value;
+		 var age=document.getElementById("age").value;
+		 if(pwd!=rpwd){
+		     alert("两次输入密码有误，请重新输入");
+		}
+		 if(isNaN(age)){
+		    alert("年龄输入错误，请重新输入");
+		}
+	  }
+   </script>
+</body>
+</html>

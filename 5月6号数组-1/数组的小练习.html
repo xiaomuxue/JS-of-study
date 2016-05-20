@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>小练习</title>
+</head>
+
+<body>
+   <script>
+      var grade=new Array(99,97,56,60,79,88,66,36,84,85,87,76,78,75,62,65,68,69,80);
+	 // alert(grade.length);
+	 /* grade[0]>=90;
+	  grade[1]>=80;
+	  grade[2]>=70;
+	  grade[3]>=60;
+	  grade[4]>=50;
+	  grade[5]>=40;
+	  grade[6]>=30;
+	  grade[7]>=20;
+	  grade[8]>=10;
+	  grade[9]>=0;*/
+	  for(var i=0;i<grade.length;i++){
+		 if(grade[i]>=90){
+		   grade[i]="优";
+		}else if(grade[i]>=80){
+		  grade[i]="良";
+		}else if(grade[i]>=70){
+		   grade[i]="中";
+		}else if(grade[i]>=60){
+		   grade[i]="及格";
+		}else{
+		   grade[i]="不及格";
+		}      
+	 }
+	 document.write(grade+"<br/>");
+	 
+	 for(var i in grade){
+	    document.write(grade[i]+"<br/>");
+	}  
+	  
+   </script>
+   
+</body>
+</html>

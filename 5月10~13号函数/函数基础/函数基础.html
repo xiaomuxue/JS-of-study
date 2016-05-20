@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>函数基础：1、为什么使用函数</title>
+</head>
+
+<body>
+   
+  <script type="text/javascript">
+    /* var x=10;
+	 var y=100;
+	 
+	 alert(x+y);
+	 
+	 var x=100;
+	 var y=1000;
+	 
+	 alert(x+y);
+	 //定义成一个函数   function/方法  method   =>  功能
+	 function add(x,y){
+	    return x+y;
+	 }
+	 alert( add(1,2));*/
+	 
+	 //第一个班的学生信息
+	  var classes1=[{
+		  name:'smith',
+		  age:19,
+		  gender:1
+		  },{
+			name:'tom',
+			age:20,
+			gender:0  
+			  },{
+		  name:'john',
+		  age:21,
+		  gender:1
+	 }];
+	 
+	 var classes2=[{
+		 name:'rose',
+		 age:20,
+		 gender:1
+		 },{
+		 name:'jack',
+		 age:23,
+		 gender:0	 
+			 },{
+		 name:'john',
+		 age:24,
+		 gender:1		 
+		} ];
+		
+	//定义一个函数来求平均年龄
+	function getAverageAge( arr){
+	   //求平均年龄
+	   var avgAge=0;
+	   var length=arr.length;       //3
+	   var sum=0;
+	   for(var i=0;i<length;i++){
+	      var stu=arr[i];      //从数组中取出的每一个元素是一个对象
+		  sum=sum+stu.age;     //从每个对象中取出年龄     变量名.属性名
+	  }
+	   avgAge=sum/length;
+	  return  avgAge;
+	}
+	alert( "一班的平均年龄："+getAverageAge( classes1 ));
+	alert( "二班的平均年龄："+getAverageAge( classes2 ));
+	
+	//求出每一个班的男女比例
+	
+	function getRatio( arr){
+	   var female=0,male=0;
+	   var length=arr.length;
+	   var r;
+	   for(var i=0;i<length;i++){
+	     var a=arr[i];
+		 if( a.gender==1){     //判断是否为女
+		    male++;
+		 }else{
+		    female++;
+		}
+	   }
+	   r=male/female;         
+	  // 求比例
+	   return r;      //一般情况下都返回，需要计算出来的值，就返回；不需要计算出来的值，就可以不返回
+	}
+	
+	document.write( "一班的男女比例："+getRatio( classes1 ));
+	document.write( "二班的男女比例："+getRatio( classes2 ));
+  </script>
+</body>
+</html>

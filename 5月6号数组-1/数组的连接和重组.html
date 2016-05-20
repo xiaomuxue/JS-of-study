@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>数组的连接和重组</title>
+  </head>
+
+  <body>
+    <pre>
+        数组的连接和重组：
+          连接：通过某个字符，把所有的数组成员连接成一个字符串
+          重组：多个数组可以合并成一个数组
+    </pre>
+    <script>
+	
+	//连接：
+       var arr=new Array(1,2,3);
+	   //参数：是一个值，字符串类型的值  ->   string类型的值     返回字符串
+	   var str=arr.join("=");
+	   console.log(str+"----"+arr);    //1=2=3
+	   
+	   var str=arr.join(1);       //相当于把1插入到1,2之间和2,3之间
+	   console.log(str+"----"+arr);   //11213   
+	   
+	   var str=arr.join(true);    //相当于把true添加到1,2之间和2,3之间
+	   console.log(str+"----"+arr);   //1true2true3
+	   
+	   var str=arr.join();     //默认是逗号
+	   console.log(str+"----"+arr);    //1,2,3
+	   
+	   var str=arr.join(" ");   //去掉逗号
+	   console.log(str+"----"+arr);    //123
+	   
+	 //  重组：
+	   var a=new Array(1,2,3);
+	   var b=new Array("e","c","f","d");
+	  /* a=b.concat(a);   //若是把b改为a,合并数组时，a在前b在后
+	   console.log(a);     //合并两个数组，b在前a在后
+	   document.write(a+"<br/>");*/   //e,c,f,d,1,2,3
+	   for(var i=0;i<a.length;i++){
+		  b.push(a[i]);
+		}
+		document.write(b+"<br/>");    //此方法输出的结果同以上一样
+		  //数组合并，除了放数组之外，还可以放其它值
+		a=a.concat(b,"jpc",a);
+		console.log(a);   //1,2,3,e,c,f,d,1,2,3
+    </script>
+  </body>
+</html>

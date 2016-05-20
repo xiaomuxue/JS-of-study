@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>过滤敏感词使用replace</title>
+<style>
+    textarea{
+		width:400px;
+		height:200px;
+    }
+	input{
+       margin:10px 0px;
+	}
+</style>
+</head>
+
+<body>
+
+   <textarea id="first"></textarea><br/>
+   <input type="button" value="过滤" onClick="filter()" ><br/>
+   <textarea id="late"></textarea>
+   
+   <script type="text/javascript">
+       //人是人他妈生的，妖是妖他妈生的，人妖是人妖他妈生的，你他妈又是谁生的
+	   function filter(){
+	      //1、获取文本域里面的值
+		  var str=document.getElementById("first").value;
+		  //alert(str);
+		  //过滤，定义正则
+		  //或者，用 | ，    逻辑运算符里面或用   ||  表示
+		  var reg=/他妈|人妖|你他妈|谁/g;
+		  //把过滤后的文本放到下面那个textarea里面去
+		  document.getElementById("late").value=str.replace(reg,function(ss){      //这一段是为了解决一个或多个字的过滤
+			   var result="";
+			   for(var i=0;i<ss.length;i++){     //使用一个for循环，来控制字数的替换。
+			      result+="*"
+			   }
+			   return result;
+			});
+	   }
+   </script>
+</body>
+</html>

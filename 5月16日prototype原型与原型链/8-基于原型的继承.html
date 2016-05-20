@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>基于原型的继承</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+     //定义父类
+	function Animal(){}
+	
+	Animal.prototype={
+	   group:"动物",
+	   gender:'',
+	   eat:function(){
+	      return "进食";
+	   },
+	   sleep:function(){
+		  return "睡觉";   
+	   },
+	   toString:function(){
+		   return this.group+" "+this.gender;
+		} 	
+	}
+	
+	//定义子类
+	function Bird(){}
+	
+	//实现继承
+	Bird.prototype=new Animal();
+	Bird.prototype.fly=function(){
+	  return "飞行";
+	}
+	
+	//创建一只鸟对象
+	var b1=new Bird();
+	document.write( b1.toString()+"  " +b1.eat()+"  "+b1.sleep()+"  "+b1.fly()+"<br/>");      //Bird会继承Animal父类的所有功能，故输出动物、进食、睡觉、飞行
+	
+	new b1.constructor();     ///constructor属性用来引用初始化该对象的构造函数
+	
+	document.write( b1.constructor+"<br/>");
+	var newBird=new b1.constructor();
+	document.write( (newBird instanceof Bird)+"<br/>");    //利用instanceof 判断若是没有把对象初始化一下，是否还是原来的类型
+	
+	Bird.prototype.constructor=Bird;      //这一句必不可少，把Bird原型再重写一下，因为前面new之后已经被覆盖了。
+	document.write( b1.constructor+"<br/>");
+	var newBird2=new b1.constructor();
+	document.write( (newBird2 instanceof Bird) +"<br/>");
+  </script>
+</body>
+</html>

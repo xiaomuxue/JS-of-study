@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>一维数组的小练习</title>
+</head>
+
+<body>
+   <script>
+     /* var arr=['*','##','***',"&&","****","##*"];
+      arr[7]="**";
+	 // var arr1=arr.concat(arr[7]);
+	   arr.sort();
+	   var result=arr.pop();
+	   var result=arr.shift();
+	   var result=arr.shift();
+	   var result=arr.shift();
+	   document.write(arr[0]+"<br/>");
+	   document.write(arr[1]+"<br/>");
+	   document.write(arr[2]+"<br/>");
+	   document.write(arr[3]+"<br/>");
+	  console.log(arr); */
+	  
+	   var arr=['*','##','***',"&&","****","##*"];
+       arr[7]="**";
+	
+	   //删除有其它符号的值
+	   for(var i=0;i<arr.length;i++){
+	      if(arr[i]!=undefined){
+		     var newarr=arr[i].split("");
+			 for(var j=0;j<newarr.length;j++){
+			   if(newarr[j]!="*"){
+				  delete arr[i];
+				}
+			}
+		  }
+	  }
+	  arr.sort();
+	  console.log(arr);
+   </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>4-全局变量-保存所有的函数引用</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      function show1(){
+	      alert('a');
+	 }
+	 function show2(){
+          alert('b');
+	 }
+	 
+	 window['show1']();
+	 window['show2']();
+	 
+	 //循环出window 中所有的成员。。。。显示
+   </script>
+</body>
+</html>

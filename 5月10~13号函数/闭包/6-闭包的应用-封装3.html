@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>6-闭包的应用-封装3</title>
+</head>
+
+<body>
+   <script type="text/jvascript">
+        //需求：封装一个Person的信息  （ name, age 将属性封装起来）
+	 var StringBuffer=( function(){
+	     var arr=new Array();
+		 return {
+		    value:function(){
+			    return arr.join(" ");
+			},
+			append:function(val){
+			    arr[arr.length]=val;
+			},
+		};
+	})();
+	
+	document.write( "原始字符串："+ StringBuffer.value()+"<br/>");   //空行
+	StringBuffer.append( "hello");
+	StringBuffer.append("world");
+	document.write("添加后的字符串："+StringBuffer.value()+"<br/>");  //hello     world
+   </script>
+</body>
+</html>

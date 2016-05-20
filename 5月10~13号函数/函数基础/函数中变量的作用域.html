@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>函数中的变量的作用域</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       //全局变量
+       var val="apple";
+	   
+	   function funA(){
+	      val="pear";      //在这里，val就是全局变量val，因为里面没加var；尽量要加var,不然容易污染全局变量
+		  document.write("inner val:"+val+"<br/>");       //pear   输出内部的全局变量
+	   }
+	   
+	   funA();
+	   document.write( "outer val:"+val+"<br/>");      //pear  输出内部的全局变量
+	   //上面  funA中操作的变量就是全局变量
+	   
+	   function funB(){
+		  var val="banana";          //这里使用   var声明了一个局部变量，虽然名字与全局变量相同，但局部变量优先于全局变量
+		  document.write( "inner2 val:"+val+"<br/>");    //banana
+		}
+		funB();
+		document.write("outer val2:"+val+"<br/>");    //pear  因为内部是一个局部变量，故访问不到，所以输出全局变量的值pear
+		
+		//小结：写函数时，声明变量要加  var
+		
+		function funC(){
+	      var cc="zy";     //局部变量
+		}
+		
+		document.write("在外面访问函数func中的cc:"+cc);   //ReferenceError:  cc  is not defined
+		
+   </script>
+</body>
+</html>

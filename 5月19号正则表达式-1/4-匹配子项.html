@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>匹配子项</title>
+</head>
+
+<body>
+   匹配子项
+   在正则里面有一个匹配子项，就用小括号()
+   <script type="text/javascript">
+       var str="2016-5-19";
+	   var reg=/\d/g;       //指把全部数字（子项）一个个的输出
+	   str.replace(reg,function($0){
+	       alert($0);      //2,0,1,6,5,1,9
+	   });
+	   
+	   var str="2016-5-19";
+	   var reg=/\d+/g;    //指在一起的一起输出来。
+	   str.replace(reg,function($0){
+	       alert($0);     //2016,5,19
+	   });
+	   
+	   var str="2016-5-19";
+	   var reg=/(\d+)-/g;   //先输出斜杠前面的所有数字，再输出斜杠
+	   str.replace(reg,function($0){
+	       alert($0);    //2016-,5-
+	   });
+	   
+	   var str="2016-5-19";
+	   var reg=/(\d-)+/g;     //先输出斜杠前面的一个数字，再输出斜杠
+	   str.replace(reg,function($0){
+	       alert($0);    //6-5-
+	   });
+	   
+	   var str="2016-5-19";
+	   var reg=/(\d+)(-)/g;
+	   str.replace(reg,function($0,$1,$2){
+	       document.write("$0:"+$0+"<br/>");    //5-
+		   document.write("$1:"+$1+"<br/>");    //2016    5
+		   document.write("$2:"+$2+"<br/>");    //-    -
+	   });      
+	   
+	   var str="2016-5-19";
+	   var reg=/(\d+)(-)/g;
+	   str=str.replace(reg,function($0,$1,$2){
+		    return  $1+".";    //相当于第二项（$2）变为了.
+		});
+		document.write(str+"<br/>");     //把2016—5—19替换为2016.5.19
+	   
+	   
+	   var str="abc";
+	   var reg=/(a)(b)(c)/;     //匹配子项（）在match里面有特殊的展示，会把子项也展示出来；指先输出总的abc，然后再单独一个个的输出
+	   document.write( str.match(reg));    //abc,a,b,c
+   </script>
+</body>
+</html>

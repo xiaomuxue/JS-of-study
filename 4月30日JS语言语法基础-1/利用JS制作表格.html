@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>利用JS制作表格</title>
+</head>
+
+<body>
+   <script>
+   //字符串拼接的核心：  首先，你心里要把html代码写好
+      var i=1;
+	  var str="<table border='1px' width='400px' cellpadding='0' cellspacing='0'>";
+	  str+="<tr><td>姓名</td><td>年龄</td></tr>";
+	  while(i<4){
+	     str+="<tr><td>张"+i+"</td><td>"+(20+i)+"</td></tr>";
+		 i++;	  
+	}
+	str+="</table>";
+	alert(str);           //此处的目的是把JS化为HTML代码，方便看；可要可不要
+	
+	document.write(str);
+   </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>8-封装继承</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       function Shape(){}      //这里有很耗时的操作时，使用这种继承封装
+	   Shape.prototype.name="形状";
+	   Shape.prototype.toString=function(){
+	      return this.name;
+	   };
+	   
+	   function extend( Child,Parent){
+	       var F=function(){};     //空的临时构造器
+		   F.prototype=Parent.prototype;
+		   Child.prototype=new F();
+		   Child.prototype.constructor=Child;
+	   }
+	   
+	   function TwoDShape(){}
+	   extend(TwoDShape,Shape);
+	   
+	   function Triangle(bottom,height){
+	        this.bottom=bottom;
+			this.height=height;
+	   }
+	   
+	   extend( Triangle,TwoDShape);
+	   Triangle.prototype.getArea=function(){
+		    return this.bottom*this.height/2;
+		}
+	   Triangle.prototype.name="三角形";
+	   var t=new Triangle( 3,4);
+	   document.write( t.getArea()+"<br/>"+t.toString());
+   </script>
+</body>
+</html>

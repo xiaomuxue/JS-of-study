@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数组求交集、并集、差集</title>
+</head>
+
+<body>
+  <script>
+  
+ // 并集和交集可一起求：
+     var arr=[1,2,3,'4','3',5,2,'8'];
+	 var arr2=[2,3,'4',8,20];
+	 
+	 var arr3=arr.concat(arr2);
+	 var x=[];
+	 var y=[];
+	 
+	 for(var i=0;i<arr3.length;i++){
+	   if(x.indexOf(arr3[i])==-1){     //去重     并集
+	      x.push(arr3[i]);
+	   }else{
+		   y.push(arr3[i]);         //交集
+		}
+	}
+	 console.log(x);
+	 console.log(y);
+	 
+	 
+	/* var arr=[1,2,3,'4','3',5,2,'8'];
+	 var arr2=[2,3,'4',8,20];
+	 var x=[];
+	 var y=[];
+	 var z=[];
+	 //先取出一个差集
+	 for(var i=0;i<arr.length;i++){
+	    if(arr2.indexOf(arr[i])==-1){
+	       x.push(arr[i]);
+	   }
+	}
+	 console.log(x);
+	 //求另一个差集
+	 for(var a=0;a<arr2.length;a++){
+	    if(arr.indexOf(arr2[a])==-1){
+		    y.push(arr2[a]);
+		}
+	}
+	console.log(y);
+	z=x.concat(y);
+	console.log(z);*/
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>4-闭包的应用-封装1</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       //需求：将数组的操作封装成一个组件来用
+	   
+	   var ycarray=( function(){
+		 //数据   -》属性
+		 var array=[];  
+	     //操作方法   ->  函数  ->  闭包  ->操作数据
+		 return {    //return {}这后面的一部分指对象,把底下的函数全部封装起来
+	          add:function(item){
+			     array[array.length]=item;
+			  },
+			  size:function(){
+			     return array.length;
+			  },
+			  clear:function(){
+			       array=[];
+			  },
+			  get:function(){
+			      return array;
+			  }
+		 };
+		 
+	  })();
+	  
+	  ycarray.add('a');
+	  ycarray.add('b');
+	  document.write( ycarray.size()+"<br/>");
+	  ycarray.clear();
+	  document.write( ycarray.size()+"<br/>" );
+	  ycarray.add('a');
+	  ycarray.add('b');
+	  var result=ycarray.get();
+	  for(var i=0;i<result.length;i++){
+	     document.write( result[i]+"<br/>");    
+	  }
+   </script>
+</body>
+</html>

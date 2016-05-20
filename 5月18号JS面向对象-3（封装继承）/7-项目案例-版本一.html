@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>9-项目案例-版本一</title>
+</head>
+
+<body>
+   <canvas height="600px" width="500px" id="canvas" />
+   //先学习一下    canvas,版本
+   <script type="text/javascript">
+      var ca= document.getElementById("canvas");     //取出界面上的画布元素
+	  var ctx=ca.getContext('2d');       //获取画布的工作的上下文（环境）
+	  ctx.strokeStyle='rgb(255,0,0)';    //设定画笔的颜色
+	  ctx.beginPath();        //开始绘制，记录路径
+	  ctx.moveTo(20,40);      //开始点的坐标
+	  ctx.lineTo( 50,60);     //画一根直线到终点      50，60
+	  ctx.closePath();      //关闭记录
+	  ctx.stroke();        //显示
+   </script>
+</body>
+</html>

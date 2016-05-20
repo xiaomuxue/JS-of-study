@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>7-闭包的应用-封装4</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      function selfNext(arr){     //看到arr，就得知道是一个数组
+	       var index=0;     //首先给它定义一个下标
+		   return function(){
+			   return arr[index++];   //因为要取得1，2，3，4；故要返回arr的值。  
+			};   
+	  }
+	  
+	  var mynext=selfNext([1,2,3,4]);
+	  
+	  while( a=mynext()){
+	     document.write(a+"<br/>");     //使用这个循环把值都取出来
+	  }
+	  
+	 /* document.write( mynext()+"<br/>");     //1    看到mynext()有括号，就得知道指的是一个函数
+	  document.write( mynext()+"<br/>");    //2
+	  document.write( mynext()+"<br/>");    //3
+	  */
+   </script>
+</body>
+</html>

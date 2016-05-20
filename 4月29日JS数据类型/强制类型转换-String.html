@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>强制类型转换-String</title>
+</head>
+
+<body>
+   <script>
+      var a=String(123);
+//	  document.write(a+"<br/>");     //"123"
+//	  a=String(0x22);
+//	  document.write(a+"<br/>");     //"34"
+//	   a=String(null);
+//	  document.write(a+"<br/>");     //"null"
+//	   a=String(true);
+//	  document.write(a+"<br/>");     //"true"
+//	   a=String(false);
+//	  document.write(a+"<br/>");     //"false"
+//	  var b;
+//	  var c=String(b);
+//	  document.write(c+"<br/>");     //"Undefined"
+	  //String 强制类型转换，不分国际，都会加上双引号
+	  
+	 //toString();
+	// var i=null;
+//	 alert(i.toString());       //报错
+//	 var j;
+//	 alert(j.toString());      //报错
+	 
+	 var k=10;
+	 alert(k.toString(8));     //二进制1010     八进制12      十六进制a
+   </script>
+</body>
+</html>

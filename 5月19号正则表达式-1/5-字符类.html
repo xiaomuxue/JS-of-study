@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>字符类</title>
+</head>
+
+<body>
+   匹配子项()
+   字符类[]      代表在字符类里面任意选择一个去进行匹配，只能选择一个
+   <script type="text/javascript">
+       var str="aefcde";
+	   var reg=/a[bcdef]c/;        //   /a(a|b|c|d|e|f)c/     反向引用
+	   console.log( reg.test(str));      //false
+	   
+	   //排除：  在中括号里面，最开始加一个^,代表排除
+	   var str="aefcde";
+	   var reg=/a[^bef]c/;        // ^表示除了bef，其它的都可以在里面。 
+	   console.log( reg.test(str));       //false
+	   
+	   //范围： -  注意：必须小的到大的
+	   var str="atdc";     //要是在a~c之间多添加一个，那么输出的则为false,如果在底下多加一个范围，输出又为true.
+	   var reg=/a[a-z][a-z]c/;       //[a-z]:表示a到z之间的数任意选一个
+	   console.log( reg.test(str));    //true
+   </script>
+</body>
+</html>

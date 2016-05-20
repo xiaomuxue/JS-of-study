@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>String-number的使用</title>
+</head>
+
+<body>
+  <script>
+       var i=100;
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   i=12.3;
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   i=-12.3;
+       document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   i=1.23e7;             //科学计数法    1.23*10^7
+       document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   i=0x12c;              //16进制的数字    0x
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   i=034;                //8进制的数字     0
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   document.write( "<br/><br/>");
+	   
+	   i="abc";
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	    i="123";
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	    i="+-*/";
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   i="";
+	   document.write( i+"数据类型为:"+typeof(i)+"<br/>");
+	   
+	   
+	   var j="123abc";
+	   alert(typeof(j++));
+	   alert(j);
+  </script>
+</body>
+</html>

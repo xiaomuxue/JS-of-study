@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>连连看</title>
+</head>
+
+<body>
+   
+   请输入你想要删除的两点坐标<br/>
+   第一点坐标：行：<input type="text" />&nbsp;&nbsp;列：<input type="text" /><br/>
+   第二点坐标：行：<input type="text" />&nbsp;&nbsp;列：<input type="text" /><br/>
+   <input type="button" value="删除坐标" onclick="del()"/><br/>
+   
+   <script>
+      /*document.write("========"+"当前棋盘如下"+"========"+"<br/>");
+	  var arr1=[[0,0],[1,0],[2,0],[3,0],[4,0],[5,0]];
+	 
+	   var arr1=new Array();
+	   for(var i=0;i<6;i++){
+	      arr1[i]=new Array();
+		  for(var j=0;j<6;j++){
+			if(i==0 || j==0){
+			   arr1[i][j]=0;
+			   var str=arr1.join(" "); 
+			}else if{
+			   	
+		    }
+		  }document.write(str+"<br/>");
+	  }
+	 document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+arr1[0][0]+"<br/>");
+	 document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+arr1[0][1]+"<br/>");
+	 document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+arr1[1][1]+"<br/>");
+	 document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+arr1[2][1]+"<br/>");
+	 document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+arr1[3][1]+"<br/>");
+	 document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+arr1[4][1]+"<br/>");
+	 document.write("========================");
+*/
+  
+        //首先，定义一堆变量
+		var row_len=0;    //行
+		var colum_len=0;     //列
+		
+		var border=0;      //边框，暂时用0来代替
+		var row_len=prompt("请输入行数：");                //行数必须要是偶数，为了保证能够消除完毕。
+		while(row_len%2!=0){
+		   row_len=prompt("请输入行数,并且行数应该为偶数："); 
+		}
+		var colum_len=prompt("请输入列数：");                //行数必须要是偶数，为了保证能够消除完毕。
+		while(colum_len%2!=0){
+		   colum_len=prompt("请输入列数,并且行数应该为偶数："); 
+		}
+        //因为有边框的存在，所以最终的行数和列数要加2
+		row_len=parseInt(row_len)+2;             //使行数变为数组型
+		colum_len=parseInt(colum_len)+2;
+		
+		//开始写棋盘
+		var chessBoard=new Array();
+		for(var i=0;i<row_len;i++){
+		  chessBoard[i]=new Array();
+		  for(var j=0;j<colum_len;j++){
+		     chessBoard[i][j]=border;
+		 }
+		}
+		
+		var num;
+		//开始替换边框里面的值
+		for(var i=1;i<row_len-1;i++){
+		  for(var j=1;j<colum_len-1;j=j+2){
+		     //  随机取值  [0,1)    ->    1-9
+			 num=Math.floor(Math.random()*9)+1;      //Math.floor表示向下取数，也就是说舍去小数点后的数，往下取值，假如7.999取7;故取值范围为：1-9
+			 chessBoard[i][j]=num;
+			 chessBoard[i][j+1]=num;
+		  }
+		}
+		
+		//打乱顺序     打乱的次数是不定的，次数越多，效果按理来说，应该越好
+		for(var i=0;i<row_len*colum_len;i++){
+		   //定义两个点的坐标
+		   var index_x1=0;
+		   var index_x2=0;
+		   var index_y1=0;
+		   var index_y2=0;
+		   //    1-  colum_len-2
+		   while( index_x1==0 || index_x1==row_len-1){
+		      index_x1=Math.ceil(Math.random()*row_len)-1;
+		   }
+		    while(index_x2==0 || index_x2==row_len-1){
+		      index_x2=Math.ceil(Math.random()*row_len)-1;
+		   }
+		    while(index_y1==0 || index_y1==colum_len-1){
+		      index_y1=Math.ceil(Math.random()*colum_len)-1;
+		   }
+		    while(index_y2==0 || index_y2==colum_len-1){
+		      index_y2=Math.ceil(Math.random()*colum_len)-1;
+		   }
+		   //交换值
+		    var temp=chessBoard[index_x1][index_y1];
+		       chessBoard[index_x1][index_y1]=chessBoard[index_x2][index_y2];
+			   chessBoard[index_x2][index_y2]=temp;
+		}
+	function show(){
+			
+		//显示棋盘
+		document.write("==========当前棋盘如下==========<br/>");
+		document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		for(var i=1;i<colum_len-1;i++){
+		  document.write("&nbsp;*"+i+"*&nbsp;"); 
+		}
+		document.write("<br/>");
+		for(var i=1;i<row_len;i++){
+		  if(i==row_len-1){
+		     break;
+		  }
+		 for(var j=0;j<colum_len-1;j++){
+		   if(j==0){
+		      document.write("&nbsp;*"+i+"*&nbsp;");
+		   }else{
+		      document.write("&nbsp;&nbsp;"+chessBoard[i][j]+"&nbsp;&nbsp;&nbsp;");
+		   }
+		}
+		/*}
+		for(var i=0;i<row_len;i++){
+		  for(var j=0;j<colum_len;j++){
+		     document.write("&nbsp;&nbsp"+chessBoard[i][j]+"&nbsp;&nbsp;");
+		 }*/
+		 document.write("<br/>");
+		}
+		document.write("=============================");
+  }
+		
+		show();
+		
+		function del(){
+		   var x1=document.getElementsByTagName("input")[0].value;
+		   var y1=document.getElementsByTagName("input")[1].value;
+		   
+		   var x2=document.getElementsByTagName("input")[2].value;
+		   var y2=document.getElementsByTagName("input")[3].value;
+		   
+		   if(chessBoard[x1][y1]==chessBoard[x2][y2]){
+			   //判定规则
+			   if(isSameLine(x1,y1,x2,y2)){
+				  chessBoard[x1][y1]="&nbsp;";
+				  chessBoard[x2][y2]="&nbsp;";
+				  show();
+				}
+			   }else{
+				  alert("这两个值不相等");
+				}
+				
+			if(chessBoard[x1][y1]==chessBoard[x2][y2]){
+			   //判定规则
+			   if(isSameLine1(x1,y1,x2,y2)){
+				  chessBoard[x1][y1]="&nbsp;";
+				  chessBoard[x2][y2]="&nbsp;";
+				  show();
+				}
+			   }else{
+				  alert("这两个值不相等");
+				}
+		}
+		
+		function isSameLine(x1,y1,x2,y2){
+	       if(x1==x2){
+		      //容错
+			 var miny=Math.min(y1,y2);
+			 var maxy=Math.max(y1,y2);
+			 var i=miny+1;
+			 for(;i<maxy;i++){
+			    if(chessBoard[x1][i]!="&nbsp;"){
+				   return false;
+				}
+			}
+			if(i==maxy){
+			   return true;
+			}
+		   }
+		}
+		
+		function isSameLine1(x1,y1,x2,y2){
+	       if(y1==y2){
+		      //容错
+			 var minx=Math.min(x1,x2);
+			 var maxx=Math.max(x1,x2);
+			 var j=minx+1;
+			 for(;j<maxx;j++){
+			    if(chessBoard[y1][j]!="&nbsp;"){
+				   return false;
+				}
+			}
+			if(j==maxx){
+			   return true;
+			}
+		   }
+		}
+		
+	
+   </script>
+</body>
+</html>

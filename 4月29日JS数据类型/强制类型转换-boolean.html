@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>强制类型转换-boolean</title>
+</head>
+
+<body>
+   <script>
+       var i=Boolean("");
+	   document.write(i+"<br/>");      //false
+	   i=Boolean(50);
+	   document.write(i+"<br/>");      //true
+	   i=Boolean(null);
+	   document.write(i+"<br/>");      //false
+	   i=Boolean(0);
+	   document.write(i+"<br/>");      //false
+	   i=Boolean(-5);
+	   document.write(i+"<br/>");      //true
+	   i=Boolean("hello");
+	   document.write(i+"<br/>");      //true
+	   
+	   //只有0、null、空的字符串，才会返回false,其余的，都会返回true
+   </script>
+</body>
+</html>

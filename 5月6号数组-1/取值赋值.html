@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>取值赋值</title>
+</head>
+
+<body>
+   <script>
+      var arr=new Array(3);
+	  //给数值赋值，那么一定要先弄清楚，你要赋值给谁
+	  //说白了，就是请带上数组的索引
+	  arr[0]=1;
+	  arr[1]="张三";
+	  arr[2]=3;
+	  document.write(arr+"&nbsp;");       //1,张三，3
+	  
+	  alert(arr[3]);       //undefined   因为上面未定义arr[3]
+	  
+	  alert(arr.length);    //输出长度3
+	  
+	  arr[8]=10;           //取值
+	  alert(arr.length);     //输出9
+	  document.write(arr+"<br/>");     //全为空
+	  
+	  for(var i=0;i<arr.length;i++){
+	     document.write(arr[i]+"<br/>");
+	 }   
+	 
+	 //数组长度赋值
+	 
+	 
+	 arr.length=2;
+	 alert(arr);
+	  
+	  
+   </script>
+</body>
+</html>

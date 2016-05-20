@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>闭包的应用bug_保存现场</title>
+</head>
+
+<body>
+
+   <p>第一行</p>
+   <p>第二行</p>
+   <p>第三行</p>
+
+   <script type="text/javascript">
+   
+   //错误的情况：匿名函数没有被调用（激活），所以它并没有保存当时的值
+     /* function addHandler( nodes){
+	     for( var i=0;i<nodes.length;i++){
+	        var node=nodes[i];
+			node.onclick=function(){
+		       alert(i);
+			};
+		 }
+	}*/
+	
+	
+	//解决方案一
+	/*function addHandler( nodes){
+       function invoke(i){      //invoke定义一个内函数
+		   return function(){      //在这里形成了一个闭包
+			   alert(i+1);
+			}
+		}
+		for(var i=0;i<nodes.length;i++){
+		   var node=nodes[i];
+		   node.onclick=invoke(i);
+		}
+	}*/
+	
+	
+	//解决方案二
+	function addHandler(nodes){
+       for(var i=0;i<nodes.length;i++){
+	      var node=nodes[i];
+		  node.onclick=function(i){     //onclick点击事件
+		     return function(){    //闭包    内部的自调用
+			    alert(i+1);
+			}
+		  }(i);
+	   }
+	}
+	var nodes=document.getElementsByTagName("p");
+	
+	addHandler(nodes);
+   </script>
+</body>
+</html>

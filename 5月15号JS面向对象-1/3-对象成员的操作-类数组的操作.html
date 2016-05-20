@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3-对象成员的操作-类数组的操作</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+       var person={name:'zy',age:20};
+	   
+	   document.write(person['name']+"<br/>"+person.age+"<br/>");
+	   /*document.write(person['age']+"<br/>"); */
+	   
+	   person.showInfo=function(){
+	      document.write("当前对象的信息："+this.name+" "+this['age']+"<br/>");      //zy      20
+	 }
+	 
+	 person.showInfo();
+	 person['showInfo']();    //这两种表示方法都可以，其实表达的是一种意思
+	 
+	 document.write("==================================<br/>");
+	 showInfoInObject(person);
+	 
+	 function showInfoInObject(obj){
+	      for(var key in obj){    //name,age,sex,   showInfo
+		      if( obj[key] instanceof Function ){    //判断obj[key]是否是函数,是函数则激活它。                  
+			  //instanceof运算符和typeof运算符的作用相似；都是用来判断类型的，但是二者也有很大的差别；typeof判断出的对象返回的值永运是object,而Istanceof 方法要求开发者明确地确认对象为某特定类型。对编辑js的复杂面向对象有很大的帮助，若是判断的类型返回true,否则为false.
+			       obj[key]();     
+			   }else{
+				   document.write( key+":"+obj[key]+"<br/>");        //name:zy      age:20
+				}
+		  }	 
+	}
+	 
+	 
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>6-使用临时构造器来解决两个问题</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       function Shape(){}
+	   Shape.prototype.name='形状';
+	   Shape.prototype.toString=function(){
+	      return this.name;
+	   };
+	   
+	   //子类
+	  function TwoDShape(){}
+	  //创建一个临时构造器
+	  var F=function(){};
+	  F.prototype=Shape.prototype;
+	  TwoDShape.prototype=new F();
+	  TwoDShape.prototype.constructor=TwoDShape;
+	  TwoDShape.prototype.name="2D形状";
+	  
+	  //孙子类
+	 function Triangle(bottom,height){
+        this.bottom=bottom;
+		this.height=height;
+	 }
+	 var G=function(){}
+	 
+	 G.prototype=TwoDShape().prototype;
+	 TwoDShape.prototype=new G();    //当new G时，是重新创建了   G 的原型，所有
+	 TwoDShape.prototype.constructor=Triangle;
+	 TwoDShape.prototype.name="三角形";
+	 Triangle.prototype.getArea=function(){
+		    return this.bottom*this.height/2;
+	}
+	
+	//测试
+	var three=new Triangle(4,5);
+	document.write( three.getArea()+"<br/>");
+	document.write( three.toString()+"<br/>");
+	
+	var t=new TwoDShape();
+    document.write( t.name+"<br/>");
+	  
+   </script>
+</body>
+</html>

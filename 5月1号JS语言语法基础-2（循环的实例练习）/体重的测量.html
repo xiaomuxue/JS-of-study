@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var height=prompt("请输入您的身高，单位为米");
+		var weight=prompt("请输入您的体重，单位为公斤/kg");
+        var bmi=weight/(height*height);
+        if(bmi>=18.5 && bmi<23.9){
+          alert("身高"+height+"米，体重"+weight+"公斤的您，是正常体重");
+        }else if(bmi<=27.9){
+        	alert("身高"+height+"米，体重"+weight+"公斤的您，是超重");
+        }else if(bmi<33){
+        	alert("身高"+height+"米，体重"+weight+"公斤的您，是轻度肥胖");
+        }else if(bmi<38){
+        	alert("身高"+height+"米，体重"+weight+"公斤的您，是中度肥胖");
+        }else if(bmi>=38){
+        	alert("身高"+height+"米，体重"+weight+"公斤的您，是超极肥胖");
+        }else{
+        	alert("身高"+height+"米，体重"+weight+"公斤的您，是偏瘦");
+        }
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>阶乘</title>
+</head>
+
+<body>
+  <script>
+     var temp=1;
+	 //控制行数
+     for(var i=1;i<=20;i++){
+		 //每一次新的行，temp乘积应该返回1
+		temp=1;
+	   for(var j=1;j<=i;j++){
+		   //计算阶乘
+		   temp=temp*j;
+		}
+		 document.write(i+"!="+temp+"<br/>");
+	}
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>创建数组</title>
+</head>
+
+<body>
+   <script type=text/javascript>
+       var arr=new Array();       //创建一个数组
+	  // alert( typeof(arr));       //object数组是一个对象
+	  document.write(arr+"<br/>");
+	  
+	  //第二种创建数组的方法
+	  var arr2=new Array(4);     //括号里面的4代表4个字的长度
+	  //注意点：数组的长度是可变的     最大长度2^23-1;  ==>  4294967295
+	  document.write(arr2+"<br/>");
+	  
+	  var arr3=new Array(1,2);     //括号里面的指值
+	  document.write(arr3+"<br/>");
+	  
+	   var arr3=new Array(1,"abc",null,true,false,undefined);     //括号里面的指值，此值可以是任意值
+	  document.write(arr3+"<br/>");
+	  
+	  var arr4=[1,2,3,4,5];
+	  document.write(arr4+"<br/>");
+	  alert( typeof(arr4));
+	  
+	  
+	  
+   </script>
+</body>
+</html>

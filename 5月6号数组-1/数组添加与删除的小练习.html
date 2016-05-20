@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>添加与删除的小练习</title>
+</head>
+
+<body>
+   <script>
+      var arr=[];
+	  arr[0]=1;
+	  arr[1]=2;
+	  var result=arr.push(3);
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);   //返回3；长度3；数组值1，2，3
+	  
+	  arr[arr.length]=4;
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);    //返回3；长度4；数组值1，2，3，4
+	  
+	  var result=arr.unshift(0);
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);    //返回5；长度5；数组值0，1，2，3，4
+	  
+	  delete arr[2];       //删除2这个值，取空    只删除值，不会删除元素，长度不变
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);    //返回5；长度5；数组值0，1，，3，4
+	  
+	  arr.length-=2;
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);    //返回5；长度3；数组值0，1，，
+	  
+	  var result=arr.pop();
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);      //返回undefined；长度2；数组值0,1，
+	  
+	  var result=arr.shift();
+	  console.log("返回值："+result+"----数组长度："+arr.length+"---数组值："+arr);      //返回0；长度1；数组值1，
+	  
+   </script>
+</body>
+</html>

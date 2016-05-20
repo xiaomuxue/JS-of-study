@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+   /*    function f1(){
+	      var a=1;
+		  return function(){       //闭包：突破变量的概念和生命周期的概念（突破变量生命周期）
+		      return a;
+		  }
+	   }
+	   
+	   var r=f1();
+	   document.write( r());        //1
+	   
+	   function greet(name){                //闭包：只有匿名函数才有的现象，调用完之后，值还保留在内存中。
+	      return function(greeting){
+		      return greeting+"  "+name;
+		 }
+	  }
+	  var r=greet("smith");
+	  document.write(r("hello"));*/
+	  
+	    function greet(name){                //闭包：只有匿名函数才有的现象，调用完之后，值还保留在内存中。
+	      return function(greeting){
+		      return greeting+"  "+name;
+		 }
+	  }
+	  
+	  var n="smith";
+	  var r=greet(n);
+	  n="tom";
+	 // r=greet(n);        //有这一句name的值就被改变了，变成了Tom;因为greet里面的name会再调用一次n，然后保存的值就变成了Tom。
+	  document.write( r("hello"));      //现在这样输出的是hello  smith
+   </script>
+</body>
+</html>

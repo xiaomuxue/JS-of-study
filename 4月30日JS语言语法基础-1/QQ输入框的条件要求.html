@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+  <pre>
+    请输入QQ号码，达到以下要求：
+    1、有没有输入
+    2、输入的是不是数字
+    3、不能有0在前面
+    4、不能是小数
+    5、输入的数字必须在5位以上，10位以内
+  </pre>
+
+
+
+   <script type="text/javascript">
+     var qq=prompt("请输入您的QQ号码");
+	 //if(qq==null || qq==""){
+//		 alert("你并没有输入QQ号");
+//		 }
+//	 if( isNaN(qq)){
+//		 alert("你输入的并不是数字");
+//		 }
+//   	 if( qq.length!=(Number(qq)+"").length){      //这一步还可这样表示 if(parseInt(qq)+""!=qq){alert("不能有0在前面");}
+//		 alert("不能有0在前面");
+//		 }
+//	 if( parseInt(qq)!=qq){
+//		alert("不能是小数"); 
+//		}
+//	 if( Number(qq)<10000 || Number(qq)>10000000000){
+//		 alert("输入的数字必须在5位以上、10位以内");
+//		 }
+		 
+	
+	if(qq==null || qq==""){
+		alert("请输入正确的QQ号");
+	}else if(isNaN(qq)){
+		alert("请输入正确的QQ号");
+	}else if(parseInt(qq)+""!=qq){
+	    alert("请输入正确的QQ号");	
+	}else if(parseInt(qq)!=qq){
+		alert("请输入正确的QQ号");
+	}else if(Number(qq)<10000 || Number(qq)>=1000000000){
+	    alert("请输入正确的QQ号");	
+	}else {
+		alert("登录成功");
+		}
+		 
+		 
+		 
+   </script>
+</body>
+</html>

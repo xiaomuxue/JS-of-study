@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>参数的值-引用类型-引用传递</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      
+	  function increment(p){
+	    p.age=p.age+1;
+	}
+	
+	var person={ name:'smith', age:20 };
+	
+	increment( person );     //调用变量increment,因此person值改变了
+	
+	document.write( person.name+"&nbsp; "+person.age);
+   </script>
+</body>
+</html>

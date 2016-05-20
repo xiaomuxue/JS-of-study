@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数学公式使用代码</title>
+</head>
+
+<body>
+   <script>
+           //斐波拉契数列
+      var f1=1;                  //第一个月的兔子数量
+	  var f2=1;                  //第二个月的兔子数量
+	  var sum=0;
+	  var i=3;                  //因为前两个定死的
+	  document.write("第1个月有1对兔子<br/>");
+	  document.write("第2个月有1对兔子<br/>");
+	  while(i<13){
+		  //先求和
+	     sum=f1+f2;           //求和
+		 f1=f2;               //第二个月的数量给第一个月
+		 f2=sum;              //和给第二个月
+		 document.write("第"+i+"个月有"+sum+"对兔子<br/>");
+		 i++;
+	}
+   </script>
+</body>
+</html>

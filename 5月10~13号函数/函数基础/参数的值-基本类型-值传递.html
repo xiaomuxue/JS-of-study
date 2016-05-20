@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>参数的值-基本类型-值传递</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+      //如果实参传递的是基本类型数据，则传值方式为值传递 (复制当前的值)
+	  function increment(number){
+	     number=number+1;
+		 return number;
+	}
+	
+	var a=1;
+	var x=increment(a);
+	
+	alert( a );    //a的值   ？？？   =>1
+	alert( x );    //x的值   ？？？   =>2
+   </script>
+</body>
+</html>
