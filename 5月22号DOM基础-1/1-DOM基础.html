@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dom基础</title>
+</head>
+
+<body>
+   <div id="mydiv">
+      <!-- 你吃不吃饼干
+       <p>吃了你就是我老婆</p>
+       <div>不吃你就是我女朋友</div>
+       <h2>不是算了</h2>    -->           <!--  这样的形式表示节点有7个  -->
+       
+       你吃不吃饼干              <!-- 空白节点  -->
+       <p>吃了你就是我老婆</p>          <!-- 空白节点  -->
+       <div>不吃你就是我女朋友</div>      <!-- 空白节点  -->
+       <h2>不是算了</h2>                <!-- 空白节点  -->
+       
+       <!-- 假如没有上面的那一段，下面就是15个，其中包括文本、空白节点、p、div、h2还有注释  -->
+       
+       
+   </div>
+      <script>
+          //严禁在网页DOM没有创建完之前，去使用DOM
+		  var mydiv=document.getElementById("mydiv");    //节点
+		  //alert(mydiv);
+		  
+		  
+		/*  在文档对象模型DOM中，每个节点都是一个对象。DOM节点有三个重要的属性。
+		  
+		  1、nodeName  :节点的名称,是只读
+		  
+		  2、nodeValue ：节点的值
+		  
+		  3、nodeType  ：节点的类型   */
+		  
+		  
+		  console.log("节点的值："+mydiv.nodeValue+"节点的类型："+mydiv.nodeType+"节点的名称："+mydiv.nodeName);
+		  
+		  //获取所有的属性
+		  alert( mydiv.attributes[0].nodeType);
+		  
+		  //节点的遍历
+		  //得到一个父节点下面所有的子节点
+		  var node=mydiv.childNodes;
+		  for(var i=0;i<node.length;i++){
+		    console.log("第"+i+"个节点<br/>,节点名："+node[i].nodeName+"<br/>节点类型："+node[i].nodeType+"节点值："+node[i].nodeValue+"<br/>");
+		 }
+		 
+		 
+		 document.write( mydiv.firstChild.nodeValue);
+		 document.write( mydiv.lastChild.nodeValue);
+		 document.write( mydiv.parentNode.nodeName);
+		 
+		 //取第二个div
+		 var sdiv=document.getElementsByTagName("div")[1];
+		 //向上的兄弟节点
+		 console.log( sdiv.previousSibling.nodeType);
+		 //向下的兄弟节点
+		 console.log( sdiv.nextSibling.nodeType);
+		 
+		 //封装
+		 function getPreSbl(n){
+		      //如果是空白节点，或者是注释，那么type一定不为1
+			  var x=n.previousSibling;
+			  while(x && x.nodeType!=1){
+			       x=x.previousSibling;
+			  }
+			  return x;	         //向上的兄弟节点
+		}
+		 
+		 function getNextSbl(n){
+	          var x=n.nextSibling;
+			  while(x && x.nodeType!=1){
+			      x=x.nextSibling;
+			 }
+			 return x;           //向下的兄弟节点
+		 }
+		 
+		 //向上的兄弟节点
+		 console.log( getPreSbl(sdiv).nodeName );
+		 //向下的兄弟节点
+		 console.log( getNextSbl(sdiv).nodeName );
+		 
+		 
+      </script>
+   
+</body>
+</html>

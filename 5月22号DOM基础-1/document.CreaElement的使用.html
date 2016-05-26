@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM查找访问节点</title>
+	<style type="text/css">
+		img{
+			width:200px;
+			height:200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">
+		<img src="../../JS学习/DOM/5月22日/fruit1.jpg" alt="水果1" id="fruit1" />
+		<img src="../../JS学习/DOM/5月22日/fruit2.jpg" alt="水果2" id="fruit2" />
+		<h1 id="like">选择你喜欢的水果：</h1>
+		<form id="form1">
+			<input name="enjoy" type="checkbox" value="apple" />苹果
+			<input name="enjoy" type="checkbox" value="banana" />香蕉
+			<input name="enjoy" type="checkbox" value="grape" />葡萄
+			<input name="enjoy" type="checkbox" value="pear" />梨
+			<input name="enjoy" type="checkbox" value="watermelon" />西瓜
+		</form>
+		<form id="form2">
+			<input name="btn" type="button" value="显示图片1路径" onclick="show()" /><br />
+			<input name="btn" type="button" value="查看喜欢的水果" onclick="look()" /><br />
+			<input name="btn" type="button" value="改变图片2" onclick="change()" /><br />
+			<input name="btn" type="button" value="点击创建图片" onclick="creatImg()" /><br />
+			<input name="btn" type="button" value="全选" onclick="allOk()" /><br />
+			<input name="btn" type="button" value="全不选" onclick="noOk()" /><br />
+           <input name="btn" type="button" value="反选" onclick="noCheck()" /><br />
+		</form>
+		
+		
+	</div>
+
+	<script type="text/javascript">
+		function show(){
+	        var f1=document.getElementById("fruit1");
+			alert( f1.getAttribute("src"));       //显示相对路径
+			alert( f1.src);        //显示绝对路径
+		}
+		
+		function look(){
+		    var inputList=document.getElementsByName("enjoy");   //获取name 
+			var like="";
+			//遍历         循环
+			for(var i=0;i<inputList.length;i++){
+		        if(inputList[i].checked==true){
+				    like=like+inputList[i].value+",";
+					//like.inputListLastChild[i].value.join("");
+				}        //if循环实现多选
+			}
+			alert(like);          //查看喜欢的水果
+		}
+		
+		function change(){
+		   var f2=document.getElementById("fruit2");
+		   f2.setAttribute("src","fruit3.jpg");
+		}
+		
+		
+		/*function allOk(checked){
+		    var f3=document.getElementsByName("enjoy"); 
+		    for(var i=0;i<f3.length;i++){
+				if(f3[i].checked==true){
+			        f3[i].checked=this.checked;
+				}else{
+				    f3[i].checked!=this.checked;
+				}
+			}
+		}*/
+		
+		function allOk(){
+		    var inputList=document.getElementsByName("enjoy");
+			for(var i=0;i<inputList.length;i++){
+			   inputList[i].checked=true;
+			}
+		}
+		
+		function noOk(){
+		    var inputList=document.getElementsByName("enjoy");
+			for(var i=0;i<inputList.length;i++){
+			   inputList[i].checked=false;
+			}
+		}
+		
+		
+		/*function noCheck(){
+		   var f4=document.getElementsByName("enjoy");
+		   for(var i=0;i<f4.length;i++){
+			  if(f4[i].checked==true){ 
+		        f4[i].checked!=f4[i].checked;
+		   }else{
+		       f4[i].checked=f4[i].checked;
+		   }
+		}
+	}*/
+	
+	function noCheck(){
+	     var inputList=document.getElementsByName("enjoy");
+		 for(var i=0;i<inputList.length;i++){
+	         if(inputList[i].checked==true){
+			    inputList[i].checked=false;
+			}else{
+			    inputList[i].checked=true;
+			}
+		 }
+	}
+	
+		function creatImg(){
+			//创建标签
+			var img=document.createElement("img");
+			//设置属性
+			img.setAttribute("src","fruit3.jpg");
+			img.setAttribute("alt","水果");
+			//问题：如何添加到网页中去
+			document.body.appendChild(img);      //表示在BODY下的最后一个子元素下创建图片
+			//document.body.insertBefore(img,document.getElementById("div1"));      //表示在div1下面直接创建新的图片
+			//document.getElementById("div1").appendChild(img);     //表示在div1最后面的子元素下创建图片
+			//document.body.insertBefore(img,document.getElementsById("fruit1"));     //这样表示是无法实现的，因为在BODY里面的fruit1前面添加图片是不符合逻辑的，因为fruit1是在BODY的子元素div里面的
+			
+			//document.getElementById("div1").insertBefore(img,document.getElementById("fruit1"));     //表示在div1里面的第一张图片前面添加图片fruit3
+			
+		}
+	</script>
+</body>
+</html>

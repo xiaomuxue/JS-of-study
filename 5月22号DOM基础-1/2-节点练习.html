@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>利用getElementById查找出（输出函数、HTML/CSS、表格）</title>
+</head>
+<body>
+<ul id="con">
+<li id="lesson1">javascript
+  <ul> 
+      <li id="tcon">基础语法</li>
+      <li>流程控制语句</li>
+      <li>函数</li>
+      <li>事件</li>
+      <li>DOM</li>
+  </ul>
+</li>
+<li id="lesson2">nodejs</li>
+<li id="lesson3">ps</li>
+<li id="lesson4">HTML/CSS 
+  <ul>
+    <li>文字</li>
+    <li>段落</li>
+    <li>表单</li>
+    <li>表格</li>  
+  </ul> 
+</li></ul>  
+<script  type="text/javascript">    
+ 
+   var mylist = document.getElementById("tcon"); 
+	//请输出   函数      htmlcss     表格
+   function getPreSbl(n){
+	  //如果是空白节点，或者是注释，那么type一定不为1
+       var x=n.PreviousSibling;
+	   while(x && x.nodeType!=1){
+	       x=x.PreviousSibling;
+	   }
+	   return x;
+   }
+	
+	function getNextSbl(n){
+       var x=n.NextSibling;
+	   while(x && x.nodeType!=1){
+	        x=x.NextSibling;
+	   }
+	   return x;
+	}
+	
+	var mylist=document.getElementById("tcon");
+	//函数
+	//var li2=getNextSbl(mylist);
+	//var hanshu=getNextSbl(li2); 
+	var hsli=getNextSbl( getNextSbl(mylist));        //这一句就相当于以上那两句，作用是一样的；   表示tcon的下一个节点的下一个节点
+	console.log( hsli.firstChild.nodeValue);      //表示输出子元素的文本值
+	//    htmlcss
+	var hcli=mylist.parentNode.parentNode.parentNode.lastChild;   //表示返回它的父函数的父函数的父函数的最后一个子节点
+	console.log( fli.firstChild.nodeValue );
+	//表格
+	var fli=getPreSbl( getPreSbl( hcli.lastChild).lastChild );
+	console.log( fli.firstChild.nodeValue);
+	
+	
+	
+	
+</script>   
+
+</body>
+</html>
