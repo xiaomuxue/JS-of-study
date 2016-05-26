@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>使用正则清除html标签（案例）</title>
+<style>
+  textarea{
+       width:400px;
+	   height:200px;
+  }
+  input{
+      margin:20px 20px;
+   }
+</style>
+</head>
+
+<body>
+   <textarea id="first"></textarea><br/>
+   <input type="button" value="替换" onclick="filter()"/><br/>
+   <textarea id="late"></textarea>
+   
+   <script type="text/javascript">
+         function filter(){     //调用点击事件
+		    var str=document.getElementById("first").value;    //取first里面的值，替换到late里面去。
+			var reg=/<[^>]+>/g;      //<[^>]+>表示除了>之外的符号，都用空的表示
+			document.getElementById("late").value=str.replace(reg,"");    //这一句表示在first 里面写的html标签都用空来替代（替换）；到late里面调用reg的内容来替换。
+		}
+   </script>
+</body>
+</html>

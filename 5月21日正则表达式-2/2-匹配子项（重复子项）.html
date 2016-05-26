@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2-匹配子项（重复子项）</title>
+</head>
+
+<body>
+   匹配子项（）
+   重复子项（）  \1   第一个子项
+               \2   第二个子项
+   
+   
+   匹配出成双成对的标签          (\w+)      \1   例如：<div><p></p></div>
+   
+   
+   <script type="text/javascript">
+       var str="abcb";
+	   var reg=/(a)(b)(c)\1/;      //表示匹配的是第一项为a,且此字符要多于一个
+	   console.log( reg.test(str));    //故这里输出false
+	   
+	    var str="abcb";
+	   var reg=/(a)(b)(c)\2/;      //表示匹配的是第二项为b,b字符是否多余一个
+	   console.log( reg.test(str));     //true
+	   
+	   
+	   
+	   var reg1=/\w\w/;        //匹配两个字符，这两个字符可以一样，也可以不一样。
+	   var reg2=/(\w)\1/;     //匹配两个字符，只能匹配两个一样的字符。
+	   
+	   
+	   
+	   //重复子项的作用：可以在一个字符串里面去找出现最多的一个字符，并且出现了多少次
+       //例： var str="accccbcdccccceccfgccccc";
+	   
+      var str="accccbcdcccdcceccfgccggggggccc";
+	  //首先排序
+	  var arr=str.split("");     //排序
+	  str=arr.sort().join("");        //arr.sort()表示自动使值从小到大排，后面再加.join("");表示去掉逗号，把数组变成字符。
+	  console.log(str);
+	  
+	  var value="";
+	  var num=0;
+	  
+	  var reg=/(\w)\1+/g;     //定义正则，表示所有的多于一个字符的所有字符  （\w）\1:重复子项
+	  str.replace(reg,function($0,$1){      //$0,$1表示变量，也可以用其它的表示；
+			//alert($0);      //alert出$0就可以看出它是多余一个字符的字符
+           //alert($1);      //可以得出它是多余一个字符的子项。
+	       if(num<$0.length){
+		        num=$0.length;       //$0:表示多余一个字符且最多的字符
+				value=$1;
+		   }
+	  }); 
+      document.write("出现最多的字符是："+value+"一共出现了："+num+"次");
+	  
+	  
+   </script>
+</body>
+</html>

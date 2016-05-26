@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>量词：规定出现的次数</title>
+</head>
+
+<body>
+   <pre>
+     量词：  规定出现的次数 {}   {3}：出现3次    {4，8}：出现4-8次之间的次数   {4，}：出现4次以上         {，4}：出现最多四次
+     
+     +：出现至少一次，最多无限    {1，}
+     
+     ？：出现0次或者1次     {0，1}
+     
+     *：任意个，至少出现0次   {0，}
+     
+     汉字：\u4e00-\u9fa5
+     
+     正则的开始和结束：
+        ^ :如果放在[]里面，指非     如果放在正则的最前面，就指开始
+        $ :如果放在正则的最后面，就指结尾
+        
+        
+      小练习：去除字符的前后空格    "     ycinof     "    ->    "ycinfo"
+     
+     string.trim();     表示去除string后面多余的空格。
+     
+    </pre>
+    
+    <input type="text" id="qq" /><input type="button" value="查询" onclick="check()" /><br/><br/>
+    
+    <script type="text/javascript">
+        function check(){
+	       var str=document.getElementById("qq").value;
+		  // var reg=/[1-9]\d{4,10}/;      //这样会出现bug,就是不管是0开始还是字开始，都会显示输出的是QQ,并且后面没加$,它就会识别为输出4个以上的值，都会输出QQ。
+		   var reg=/^[1-9]\d{4,10}$/;       //以1-9的数字开头，一共5-10个数字结束
+		   if( reg.test(str)){
+		        alert("是QQ号");
+		   }else{
+			    alert("不是QQ号");
+			}
+	   }
+	   
+	   
+	   
+	   var str="   ycinfo    ";
+	   document.write("("+str+")"+"<br/>");
+	   var reg=/^\s+ |\s+$/g;   //^\s:表示去除以空格开始的空格，\s+$:表示去除以空格结尾的空格
+	   str=str.replace(reg,"");
+	   document.write("("+str+")"+"<br/>");
+	   
+	   
+	   
+	   var osVersion="Ubuntu 8";
+	   var re=/^[a-z]+\s+\d+$/i;    //^[a-z]+表示以a到z的符号开始的可以有多个，\s+可以有多个空格，\d+$:表示以数字结尾的
+	   alert(re.test(osVersion));     //true
+	   
+	   var s='---abc123---';
+	   alert(s.replace(/-/g,'#'));     //###abc123###
+	   alert(s.replace(/-+/g,'#'));    //#abc123#
+	   
+	   
+	   var s='  asd dfe ';
+	   alert(s.replace(/\s+/g,"));
+	   alert(s.replace(/^\s+/,"));
+	   alert(s.replace(/\s+$/,")+'|');
+	   
+    </script>
+</body>
+</html>
