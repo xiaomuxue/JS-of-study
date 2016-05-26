@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>一键换肤</title>
+<style>
+   p{color:red;}
+</style>
+</head>
+
+<body>
+
+   <div id="mydiv" style="width:400px;height:400px;background-color:pink" onclick="changeBgColor()">
+   
+   </div>
+
+   <script>
+       function changBgColor(){
+	        var mydiv=document.getElementById("mydiv");
+			mydiv.style.backgroundColor="blue";
+	   }
+   </script>
+   
+   <!-- 一键换肤  -->
+   <div id="Pic" style="background:url(../../%E5%9B%BE%E7%89%87%E5%88%87%E6%8D%A2/img/1.jpg);width:800px;height:600px;background-size:cover;">
+   
+   </div>
+   <p>测试文字</p>
+   <input type="button" value="一键换肤" onclick="changePic()"/>
+   
+   <script>
+       function changePic(){
+		 var mydiv=document.getElementById("Pic");
+		 mydiv.style.background="3.jpg";                   //更换出来的背景
+		 alert( document.getElementsByTagName("p")[0].style.color);               //更改p的文字颜色
+		}
+   </script>
+   
+</body>
+</html>

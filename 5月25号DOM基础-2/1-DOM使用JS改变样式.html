@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+
+<body>
+   <input type="text" value="abcde"/>
+   <div>
+     <p>测试文字</p>
+   </div>
+   
+   除了innerHTML和innerText,还有outerText和outerHTML
+   
+   <script>
+     /* var inp=document.getElementByTagName("input")[0];
+	  alert(inp.value);     //取到的是标签里面的值       abcde
+	  
+	  var myp=document.getElementByTagName("p")[0];
+	  alert(myp.value);     //无法取到标签的文本       undefine*/
+	 
+	 var mydiv=document.getElementsByTagName("div")[0]; 
+	 //可以取出标签
+	 console.log("innerHTML: "+mydiv.innerHTML);        //<p>测试文字</p>     平时这个用的比较多
+	 //只能取出文本值
+	 console.log("innerText: "+mydiv.innerText);        //测试文字        
+	 
+   </script>
+   
+   <script>
+       var mydiv=document.getElementsByTagName("div")[0];
+	  // mydiv.innerHTML="<p>测试文字</p>";        //测试文字
+	   //最明显的作用：在网页里面显示html标签代码
+	   mydiv.innerText="<p>测试文字</p>";          //<p>测试文字</p>
+   </script>
+</body>
+</html>

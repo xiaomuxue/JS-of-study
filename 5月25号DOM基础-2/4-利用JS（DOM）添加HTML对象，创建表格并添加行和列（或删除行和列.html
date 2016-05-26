@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>利用JS（DOM）添加HTML对象，创建表格并添加行和列（或删除行和列）</title>
+</head>
+
+<body>
+<table border="1"  cellpadding="0"  width="400px"  cellspacing="0" id="myTable">
+			<tr id="row1">
+				<td>书名</td>
+				<td>价格</td>
+			</tr>
+			<tr id="row2">
+				<td>看得见风景的房间</td>
+				<td>￥30.00</td>
+			</tr>
+			<tr id="row3">
+				<td>60个瞬间</td>
+				<td>￥32.00</td>
+			</tr>
+		</table>
+		<br /><br />
+		<input type="button" name="b1" id="" value="添加一行" onclick="add()"/>
+		<input type="button" name="b2" id="" value="删除第二行" onclick="sub()"/>
+		<input type="button" name="b3" id="" value="修改标题" onclick="chg()"/>
+		
+		<script type="text/javascript">
+			
+			//添加行
+			function add(){
+				var table=document.getElementById("myTable");
+				var newRow=table.insertRow(table.rows.length);
+				
+				var cell1=newRow.insertCell(0);
+				cell1.innerHTML="爱你，么么哒。";
+				var cell2=newRow.insertCell(1);
+				cell2.appendChild(document.createTextNode("998"));
+			}
+			
+			//删除第二行
+			function sub(){
+				document.getElementById("myTable").deleteRow(1);//第二行即索引值为1
+			}
+			
+			//改变title
+			function chg(){
+				var row1=document.getElementById("myTable").rows[0];
+				//动态修改类名
+				row1.className="title";
+			}
+   </script>
+</body>
+</html>

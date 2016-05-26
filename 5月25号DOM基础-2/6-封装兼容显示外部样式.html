@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>封装兼容显示外部样式</title>
+<style>
+    div{width:400px;height:200px;background-color:red;}
+</style>
+</head>
+
+<body>
+   <div id="mydiv"></div>
+   
+   <script>
+       var mydiv=document.getElementById("mydiv");
+	   console.log("width:"+mydiv.style.width);
+	   //获取节点的当前样式        obj.currentStyle[attr]          //此方法只兼容IE
+	/*   console.log("width:"+mydiv.currentStyle["width"]);
+	   //                                           元素    判断是否为伪类（默认为false）   此方法兼容谷歌、FF 不兼容IE
+	   console.log("width:"+window.getComputedStyle(mydiv,false)["width"]);*/
+	   
+	   function getStyle(obj,attr){
+	       if(obj.currentStyle){
+		        //这种判别方式说明你是IE浏览器
+				return obj.currentStyle[attr];
+		   }else{       //说明你是谷歌或者ff
+		        return window.getComputedStyle(obj,false)[attr];
+		   }
+	   }
+	   //                            变量
+	   console.log("width:"+getStyle(mydiv,"width"));
+   </script>
+</body>
+</html>

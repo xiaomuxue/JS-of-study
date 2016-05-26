@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM创建表格</title>
+</head>
+
+<body>
+
+
+<script>
+    var arr=[["张三",19,"男"],["李四","22","女"],["王五","20","男"],["王五","20","男"],["赵六","21","女"]];
+	//创建表格
+	var table=document.createElement("table");
+	table.setAttribute("border","1px");       //设置table属性
+	table.setAttribute("width","400px");
+	table.setAttribute("cellpadding","0px");
+	table.setAttribute("cellspacing","0px");
+	
+	//用来拼接的字符串      (字符串的拼接作用很大)
+	var str="";
+	
+	for(var i=0;i<arr.length;i++){
+       //和行相关
+	   str+="<tr>";
+	   for(var j=0;j<arr.length-2;j++){
+	      str+="<td>"+arr[i][j]+"</td>"       //和列相关
+	   }
+	   str+="</tr>";               //列的结束
+	}
+	table.innerHTML=str;
+	
+	document.body.appendChild(table);            //添加表格
+</script>
+</body>
+</html>

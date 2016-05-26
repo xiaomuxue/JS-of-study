@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HTML对象</title>
+</head>
+
+<body>
+   <script>
+       var table=document.createElement("table");
+	   //要使用table对象，那就可以直接使用table对象里面的属性和方法
+	   table.border="1";           //添加属性
+	   table.width="400";
+	   table.cellPadding="0";          //注意这里的P得大写，下面的S也得大写
+	   table.cellSpacing="0";
+	   //添加行
+	   table.insertRow(0);           //0代表从第一行开始（添加第一行）
+	   for(var i=0;i<4;i++){
+	       //添加列，必须要知道在哪一行去添加
+		   table.rows[0].insertCell(i);             //添加列
+		   //添加表格内容
+		   table.rows[0].cells[i].appendChild(document.createTextNode("cell"+i));
+	  }
+	  //table.deleteRow(0);          //删除行
+	  
+	  
+	   table.insertRow(1);           //0代表从第一行开始（添加第一行）
+	   for(var i=0;i<4;i++){
+	       //添加列，必须要知道在哪一行去添加
+		   table.rows[1].insertCell(i);             //添加列
+		   //添加表格内容
+		   table.rows[1].cells[i].appendChild(document.createTextNode("cell"+i));
+	  }
+	 // table.deleteRow(0);          //删除行
+	  document.body.appendChild(table);
+	   
+   </script>
+</body>
+</html>
