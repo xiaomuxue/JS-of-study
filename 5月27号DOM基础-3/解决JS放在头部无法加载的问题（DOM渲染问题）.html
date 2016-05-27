@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM树（渲染的学习）</title>
+<script>
+    /* window.setTimeout(function(){             //windodw.setTime()延迟器，使括号里面的内容延时加载。
+	       document.getElementsByTagName("p")[0].style.color="red";
+	},3000);           //表示过了3秒后，再加载这句代码 
+	*/
+	 window.setTimeout(function(){             //windodw.setTime()延迟器，使括号里面的内容延时加载。
+	       document.getElementsByTagName("b")[0].style.color="red";
+	},30);      //假如DOM树的加载时间超过了30毫秒，就无法实现JS的效果   然后30秒还是会有闪烁    假如改为了10秒，就不会有闪烁
+	
+	//网页加载完毕之后执行的代码       是否完美解决DOMReady         无法解决（因为要整个网页的html东西全部加载完了，才能执行这段代码，然后JS的效果才能出现，需要很长时间，故我们会认为它卡死了，或者网速不行，这是它的缺点）
+	/*window.onload=function(){
+	    document.getElementsByTagName("p")[0].style.color="red";
+	}        */    
+	
+	
+	window.onload=function(){
+	     alert("DOM树以及外部资源全部加载完毕");           
+	}  
+	//此方法只适合新版本的浏览器（缺点）
+	function DOMContentLoaded(){
+	    alert("DOM树加载完毕");             //DOMContentLoaded这个在IE浏览器里面是无法实现出来的
+	}  
+	                        //事件名              事件触发的回调函数  事件是否在捕获事件冒泡阶段
+	document.addEventListener("DOMContentLoaded",DOMContentLoaded,false);        //添加监听事件
+	
+	//这个也是结合外部的图片使用，才能看到它明显的效果
+	document.onreadystatechange=function(){          //在谷歌浏览器运行时，运行到了第三步interactive时，就会完全阻塞
+	                                                 //但是在火狐里面就不会，它加载完interactive时，图片也能加载出来
+	    alert( document.readyState );               //document.readyState判断文档是否加载完成       
+	}
+	
+	//document.readyState是可读的，传回值有4个可能性，1、-loading      2、-loaded      前面这两个是浏览器本身的传回值，所以跟前端是没有关系的     3、-interactive               4、-complete
+</script>
+</head>
+
+<body>
+   <p>文字变红</p>
+   <b>文字变红</b>
+   
+   <img src=""/>     <!-- 此处的图片最好不是本地的，才能看出它的效果 -->
+</body>
+</html>
