@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>案例1</title>
+<script type="text/javascript" src="domReady.js"></script>
+</head>
+
+<body>
+  <div id="msg"></div>
+  <div>
+      <img src="http://www.bz55.com/uploads/allimg/130521/1-130521100358.jpg"/>
+      <img src="http://www.bz55.com/uploads/allimg/130531/1-1305310Z506.jpg"/>
+      <img src="http://www.bz55.com/uploads/allimg/130531/1-1305310Z505.jpg"/>
+      <img src="http://www.bz55.com/uploads/allimg/130531/1-1305310Z458-50.jpg"/>
+      <img src="http://www.bz55.com/uploads/allimg/130521/1-130521100357.jpg"/>
+  </div>
+  
+  <script>
+      var d=document;
+	  var msg=d.getElementById("msg");
+	  var time1=null;
+	  var time2=null;
+	  myReady(function(){
+	     msg.innerHTML+="DOM已经加载完毕<br/>";
+		 time1=new Date().getTime();       //获取时间戳        从1970年开始计算
+		 msg.innerHTML+="时间戳："+time1+"<br/>";
+	  });
+	  window.onload=function(){
+	      msg.innerHTML+="onload已经加载<br/>";
+		  time2=new Date().getTime();
+		  msg.innerHTML+="时间戳："+time2+"<br/>";
+		  msg.innerHTML+="domReady比onload快："+(time2-time1)+"ms<br/>";
+	}
+  </script>
+</body>
+</html>

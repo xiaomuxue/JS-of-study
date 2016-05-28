@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>制作点击时，弹出自定义右键菜单</title>
+</head>
+
+<body>
+  <p id="myp">点我，弹出自定义右键菜单</p>
+  <div id="mydiv">
+     <ul>
+        <li>图片另存为</li>
+        <li>复制链接</li>
+        <li>将页面另存为</li>
+        <li>复制</li>
+        <li>粘贴</li>
+     </ul>
+  </div>
+  
+  <script>
+      var myp=document.getElementById("myp");
+	  var mydiv=document.getElementById("mydiv");
+	  myp.onmousedown=function(event){                   //onmousedown鼠标按下事件
+	      var event=event?event:window.event;       //兼容IE
+		  if(event.button==2){             //说明是右键
+		     document.oncontextmenu=function(aevent){       //阻止默认行为
+			      if(window.event){
+					  aevent.preventDefault();       //如果是IE9以上的，就得使用这一句来阻止它的默认行为
+				      /* aevent=window.event;              
+					   aevent.returnValue=false;*/        //IE（8、7、6、5）中阻止事件的默认行为
+				  }else{
+				       aevent.preventDefault();       //现代浏览器阻止事件的默认行为
+				  }
+			 };
+			// mydiv.style.display="block";          //鼠标按下时，就显示mydiv里面的内容
+			//mydiv.style.cssText="display:block;";    //和上面一句的功能一样的
+			mydiv.style.cssText="display:block;position:absolute;top:"+(event.clientY+5)+"px;left:"+event.clientX+"px;";
+		  }
+	}
+	mydiv.onmouseout=function(){       //onmouseout鼠标移出事件
+		//直接写CSS代码
+	    // mydiv.style.cssText="display:none;";       //表示鼠标移出时，就隐藏
+		setTime(function(){mydiv.style.cssText="display:none;"},400);
+	}
+  </script>
+</body>
+</html>

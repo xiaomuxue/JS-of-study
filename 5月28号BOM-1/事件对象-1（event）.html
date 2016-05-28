@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>事件对象</title>
+</head>
+
+<body>
+  <input type="button" value="点我" onmousedown="show(event)"/>
+  
+  <script>
+     function show(event){
+		 //判断，当成参数的event存不存在，如果存在，就是这个event,如果不存在，说明是IE，用IE的方法来取
+		 var event=event?event:window.event;       //兼容浏览器
+		 
+	     alert(event.button);      //点击左键时，弹出0      点击中键时，弹出1   点击右键，弹出2
+	}       //现代浏览器里面，左键为0， 右键为2  中键为1          
+	
+	
+  </script>
+</body>
+</html>

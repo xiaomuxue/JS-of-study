@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>单击和双击分别在一个按钮上</title>
+</head>
+
+<body>
+    直接在标签上面绑定事件
+   <input type="button" value="点我" onclick="show()"/>
+   <script>
+      function show(){                 //onclick就是普通的单击事件
+	     alert("叫你点我就点我，真乖");
+	}
+   </script>
+   
+   <input type="button" value="双击点我" />
+   <script>
+       var btn=document.getElementsByTagName("input")[1];
+	   btn.ondblclick=function(){         //dblclick是双击事件
+		    alert("点击我两下了");
+		}          
+	//另一种方法实现双击
+	/*btn.addEventListener("dblclick",function(){            //添加双点击监听事件
+	     alert("双击了我");
+	});           这一句和上面btn.addEventListener=function(){}是一样的作用*/
+   </script>
+</body>
+</html>
