@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>鼠标事件，可拖动的层</title>
+<style>
+   #box{position:absolute;left:300px;top:200px;font-size:12px;background:pink;padding:5px;box-shadow:2px 2px 4px #ccc;-moz-box-shadow:2px 2px 4px #ccc;-webkit-box-shadow:2px -2px 4px #ccc;-ms-box-shadow:2px 2px 4px #ccc;}
+   #content{border:1px solid #339;}
+   #top{width:430px;line-height:25px;cursor:move;background:#99F;border-bottom:1px solid #339;padding-left:5px;}
+   #close{color:red;font-size:20px;font-weight:bold;float:right;position:absolute;top:5px;right:10px;cursor:pointer;}
+   #bottom{width:420px;height:250px;padding:10px 5px;background:#fff;}
+</style>
+</head>
+
+<body>
+    <div id="box">
+       <div id="content">
+           <div id="top">
+              可拖拽
+              <span id="close" onClick="aaa()">X</span>
+           </div>
+           <div id="bottom">
+               内容。。。。
+           </div>
+        </div>
+    </div>
+    
+    
+    <script>
+	
+	   window.onload=function(){        //window.onload指当DOM树加载完成后再执行JS
+		     var oBox=document.getElementById("box");       //获取box的ID
+			 var oTop=document.getElementById("top");
+			/* document.getElementById("close").onclick=function(){   //添加点击事件
+			   oBox.style.display="none";
+			 }*/                        //点击隐藏事件也可以这样写
+			
+			startDrag(oBox,oTop);       //直接在这里调用startDrag函数，
+		}
+		
+		function aaa(){                                         //一定得注意这种写法，不能放在window里面，会成为内置函数，那就获取不到了。
+			var oBox=document.getElementById("box");
+			    oBox.style.display="none";
+			}
+		/*var oBox=document.getElementById("box");	
+		oBox.onmousedown=function(event){
+				var event=event?event:window.event;
+				if(event.button==2){
+					document.oncontextmenu=function(aevent){
+				        if(window.event){
+						    aevent=window.aevent;
+							aevent.returnValue=false;
+							aevent.preventDefault();
+						}else{
+						    aevenr.preventDefault();
+						}
+					};
+				   oBox.style.display="block"
+				}        //想解决鼠标点击右键，就弹出此框
+			  }*/        //毫无意义的一段
+		
+		var params={       //创建一个新的数组
+		     left:0,
+			 top:0,
+			 currentX:0,       //定义当前的X坐标
+			 currentY:0,       //定义当前的坐标Y
+			 flag:false     //flag:指移动
+		}
+		
+		function getStyle(obj,attr){
+		   if(obj.currentStyle){        //currentStyle兼容IE和opera
+		       return obj.currentStyle[attr];
+		   }else{
+		       return getComputedStyle(obj,false)[attr];     //getComputedStyle兼容ff和谷歌
+		   }
+		}           //封装浏览器的兼容性
+		
+		function startDrag(oBox,oTop){
+			//获取到默认状态下box的left top的值
+			params.left=getStyle(oBox,"left");
+			params.top=getStyle(oBox,"top");
+	        //鼠标按下
+			oTop.onmousedown=function(event){
+			   var event=event?event:window.event;    //首先设置浏览器IE的兼容性
+		       //1、修改flag的值
+			    params.flag=true;
+				//解决一个Bug,不能让鼠标去选中文字
+				if(!event){
+			        event=window.event;
+					oTop.onselectstart=function(){
+					   return false;
+					}
+				}
+				/*oTop.onselectstart=function(){
+				     return false;
+				}*/
+			   //2、得到当前鼠标的坐标
+			 params.currentX=event.clientX;
+			 params.currentY=event.clientY;
+		   }
+		   //鼠标移动
+		  document.onmousemove=function(event){
+			  var event=event?event:window.event; 
+		       //1、判断flag
+			   if(params.flag){
+				   var nowX=event.clientX;    //当前的X坐标
+				   var nowY=event.clientY;   //当前的Y坐标
+				   var disX=nowX-params.currentX;    //移动前后x轴的差值
+				   var disY=nowY-params.currentY;    //移动前后Y轴的差值
+				   oBox.style.left=parseInt(params.left)+disX+"px";     //left是有px的，得把它化为整形
+				   oBox.style.top=parseInt(params.top)+disY+"px";
+				}
+			   //2、得到移动的距离
+			   //3、赋值
+			  
+		   }
+		   //鼠标松开
+		   document.onmouseup=function(event){
+			   var event=event?event:window.event;
+		      //1、修改flag的值
+			  params.flag=false;
+			  
+			  params.left=getStyle(oBox,"left");
+			  params.top=getStyle(oBox,"top");
+			  
+		   }
+	   }
+		
+		
+		
+	   
+	   
+      /* var closes=document.getElementById("box");
+	   function None(){
+		  var closes=false;
+	      if(!closes==false){
+		     closes.style.cssText="display:block;";
+		  }else{
+		     closes.style.cssText="display:none;";
+		  }
+	   }*/
+    </script>
+</body>
+</html>

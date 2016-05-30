@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  *{margin:0 auto;padding:0px;}
+  #canvas{margin:0px auto;display:block;}
+</style>
+</head>
+
+<body>
+  <canvas id="canvas">
+     你的浏览器不支持canvas,请更新浏览器
+  </canvas>
+  
+  <script>
+      //定义canvas的大小
+	  var canvasWidth=600;
+	  var canvasHeight=canvasWidth;
+	  //定义变量
+	  var flag=false;
+	  var lastLoc={x:0,y:0};    //定义结束位置
+	  
+	  //得到context
+	  var canvas=document.getElementById("canvas");
+	  var context=canvas.getContext("2d");
+	  
+	  //设置canvas的大小
+	  canvas.width=canvasWidth;
+	  canvas.height=canvasHeight;
+	  
+	  //开始绘制
+	  draw();       //在此处定义一个函数，是为了以后可以直接调用function draw（）这个函数
+	  
+	  function draw(){
+	      context.save();       //.save()是为了保存当前绘制状态
+		  //这一段canvas的属性，只会在这一段起作用
+		  //定义画笔的颜色
+		  context.strokeStyle="rgb(230,10,10)";
+		  //开始绘制
+		  context.beginPath();
+		  context.moveTo(0,0);     //从零点开始绘制（也就是说从0到0）；假如是.moveTop(200,300)如同.moveTop(x,y)
+		  context.lineTo(canvasWidth,0);   //绘制线条从原点到设定的宽度   
+		  context.lineTo(canvasWidth,canvasHeight);   //绘制线条从原点到设定的宽度和设定的高度的那个点
+		  context.lineTo(0,canvasHeight);         //绘制线从原点到设定的高度的那个点
+		
+		  //绘制路径结束
+		  context.closePath();
+		  //画笔的粗细
+		  context.lineWidth=6;
+		  //显示到canvas里面
+		  context.stroke();        //stroke()指把内容显示到画布里面去
+		  
+		  //画米字格
+		  context.beginPath();     //开始绘制
+		  context.moveTo(0,0);     //还是从原点开始
+		  context.lineTo(canvasWidth,canvasHeight);        //首先画一条从原点到（设定的宽度、设定的高度）的线条	  
+		  //开始绘制中间的那条竖线
+		  context.moveTo(canvasWidth/2,0);
+		  context.lineTo(canvasWidth/2,canvasHeight);     
+		  //绘制中间那条竖线
+		  context.moveTo(0,canvasHeight/2);
+		  context.lineTo(canvasWidth,canvasHeight/2);
+		  //绘制斜线，从设定的宽度的那个点到设定高度的那个点
+		  context.moveTo(canvasWidth,0);
+		  context.lineTo(0,canvasHeight);
+		  
+		  context.lineWidth=1;     //设置线条的粗细
+		  context.stroke();       //stroke()指把内容显示到画布里面
+		  context.restore();      //restore()用来恢复canvas之前保存的状态，防止save后，canvas执行的操作对后续的绘制有影响
+	 }
+	 
+	 //用户开始绘制
+	 canvas.onmousedown=function(event){
+	    //鼠标按下事件
+		delDefault(event);         //阻止默认事件
+		flag=true;                 //当属性flag为true时，
+		lastLoc=windowToCanvas(event.clientX,event.clientY);     //最后的位置就是当前的坐标点
+	}
+	canvas.onmouseup=function(event){
+       //鼠标松开事件
+	   delDefault(event);    //阻止默认事件
+	   flag=false;
+	}
+	canvas.onmouseout=function(event){
+		//鼠标移出事件
+	   delDefault(event);        //阻止默认事件
+	   flag=false;
+	}
+	canvas.onmousemove=function(event){
+       //鼠标移动事件
+	   delDefault(event);        //阻止默认事件
+	   if(flag){
+	       //开始绘制
+		   var curLoc=windowToCanvas(event.clientX,event.clientY);       //把当前鼠标所在位置赋值给开始位置
+		   context.beginPath();
+		   context.moveTo(lastLoc.x,lastLoc.y);      
+		   context.lineTo(curLoc.x,curLoc.y);            //从结束位置到开始位置
+		   context.strokeStyle="rgb(148,105,30)";       //给鼠标拖动画笔设置颜色
+		   context.lineWidth=15;            //设置画笔的粗细
+		   context.lineCap="round";              //定义线的结束位置为圆头
+		   context.lineJoin="round";            //定义线的形状为圆头
+		   context.closePath();            //结束绘制
+		   context.stroke();           //把内容显示出来
+		   //结束位置应该是下一次的开始位置
+		   lastLoc=curLoc;
+	   }
+	}
+	
+	//组织浏览器的默认行为
+	function delDefault(event){
+       if(window.event){
+	       event=window.event;
+		   event.returnValue=false;
+		   event.preventDefault();
+	   }else{
+	       event.preventDefault();
+	   }
+	}
+	
+	//坐标转换
+	function windowToCanvas(x,y){
+	    //获得canvas的盒子，然后通过这个盒子来获得canvas的left和top
+		var box=canvas.getBoundingClientRect();      //BoundingClientRect()绘制图形根据鼠标在box里面拖动而变化，此处的作用是：使鼠标按下拖动时，只能在画布里面画
+		//console.log("x:"+(x-box.left)+"----y:"+(y-box.top));    //用来测试是否出现的是否是数值
+		return {x:Math.floor(x-box.left),y:Math.floor(y-box.top)};     
+	}
+  </script>
+  
+  
+</body>
+</html>
