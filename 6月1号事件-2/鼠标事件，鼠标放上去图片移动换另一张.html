@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>鼠标事件，鼠标放上去图片移动换另一张</title>
+<style>
+*{padding:0px;margin:0px auto;}
+#container{height:477px;margin:0px auto;border:1px solid #ccc;position:relative;overflow:hidden;}
+#container img{border:1px solid #ccc;position:absolute;left:0;}
+</style>
+</head>
+
+<body>
+  <div id="container">
+     <img src="img/door1.png" alt="图片1" title="图片1"/>
+     <img src="img/door2.png" alt="图片2" title="图片2"/>
+     <img src="img/door3.png" alt="图片3" title="图片3"/>
+     <img src="img/door4.png" alt="图片4" title="图片4"/>
+  </div>
+  
+  <script type="text/javascript">
+     window.onload=function(){
+	    var box=document.getElementById("container");
+		//获取到所有的图片
+		var imgs=document.getElementsByTagName("img");
+		//单张图片的大小
+		var imgWidth=imgs[0].offsetWidth;        //获取某一个元素的当前大小
+		//被盖住的图片露出来的大小
+		var imgsshowWidth=160;
+		
+		//总容器的大小
+		var boxWidth=imgWidth+imgsshowWidth*(imgs.length-1);  
+		box.style.width=boxWidth+"px";
+		
+		//设置每一个图片的初始位置
+		function setImagesPos(){
+		   for(var i=1;i<imgs.length;i++){
+			    imgs[i].style.left=imgWidth+imgsshowWidth*(i-1)+"px";
+			}
+		}
+		setImagesPos();      //调用一次setImagesPos()函数
+		
+		//定义 计算每一张图片被掩盖的大小
+		var hiddenWidth=imgWidth-imgsshowWidth;
+		
+		//添加事件
+		for(var i=0;i<imgs.length;i++){
+		   (function(i){
+			   //绑定事件
+			   imgs[i].onmouseover=function(){
+				//首先，先把图片初始化
+				setImagesPos();
+				//控制图片的大小
+				for(var j=1;j<=i;j++){
+				   imgs[j].style.left=parseInt(imgs[j].style.left)-hiddenWidth+"px";
+				}
+				}
+			})(i)
+		}
+	}
+  </script>
+</body>
+</html>
