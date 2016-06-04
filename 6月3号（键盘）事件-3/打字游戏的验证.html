@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>打字游戏的验证</title>
+<style>
+   .style1{
+	   color:green;
+	}
+  .style2{
+     color:red;
+  }
+</style>
+</head>
+
+<body>
+  打字游戏：<h2 id="test"></h2>
+  <p>键入内容：
+     <input name="textfield" type="text" size="50" id="inp"/>
+  </p>
+  
+  <script>
+     var str="welcome to study center";       //先定义内容
+	 
+	 window.onload=function(){           //先加载完所有的DOM树
+	    var htmlstr="";                //定义一个空的字符串
+		for(var i=0;i<str.length;i++){          //利用循环，把它一个一个的加载出来
+		   htmlstr+="<span id='myspan"+i+"'>"+str.substring(i,i+1)+"</span>";
+		}        //substring 方法将返回一个包含从 i(start) 到最后i+1（不包含 end ）的子字符串的字符串。
+		document.getElementById("test").innerHTML=htmlstr;        
+	}
+	
+	var j=0;
+	var inp=document.getElementById("inp");
+	inp.onkeydown=function(event){            //定义一个键盘按下事件
+	   var event=event?event:window.event;
+	   var keycode=event.keyCode;
+	   //生成一个字符       大写A和小写a之间隔了32个长度，故后面得加上32
+	   var realchar=String.fromCharCode(keycode+32);
+	   //alert(realchar);
+	   //a-z的键值是（65-90）   空格的键值是（8）    删除的键值是（32）
+	   if( (keycode>=65 && keycode<=90 ) || keycode==8 || keycode==32 ){
+		   if(str.substring(j,j+1)==realchar){
+			   document.getElementById("myspan"+j).className="style1";   
+		  }else if(keycode==8){         //backspace
+		      j--;
+			  if(j<0){
+				j=0;  
+			}
+			document.getElementById("myspan"+j).className="";       //删除时，为空值
+            return;        //在这里必须return,不然j--会失效
+		  }else{
+		     document.getElementById("myspan"+j).className="style2";
+		  }
+		  j++;
+		}
+	}
+	
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>改进版的鱼（利用快捷键（上下左右键使它动起来））</title>
+</head>
+
+<body>
+   <img src="fish.gif" id="fish" style="position:absolute;left:0px;top:0px;" width="80" height="80" />
+   
+   <script>
+       document.onmousemove=function(event){         //鼠标的移动事件
+	      var event=event?event:window.event;
+		  document.getElementById("fish").style.top=(event.clientY-40)+"px";    //图片的样式距上的距离为鼠标现在的距上坐标（event.clientY）减40的目的是使鼠标的位置不是在图片的左上角
+		  document.getElementById("fish").style.left=(event.clientX-18)+"px";
+	 } 
+	 
+	 
+	 document.onkeydown=function(event){           //键盘按下事件
+	     var event=event?event:window.event;       //写它的兼容性
+		 var fish=document.getElementById("fish");     //获取图片
+		 var num;
+		 switch(event.keyCode){
+	        case 37:        //左键的键值为37
+			      num=parseInt(fish.style.left);
+				  if(num>=10){
+				      fish.style.left=(num-10)+"px";      //减去的值是鱼移动的速度
+				  };
+			break;
+			 case 38:         //上键的键值为38
+			     num=parseInt(fish.style.top);
+				 if(num>=10){
+				     fish.style.top=(num-10)+"px";
+				};
+			break;
+			 case 39:        //右键的键值为39
+			     num=parseInt(fish.style.left);       //减去76，是减去鱼的一个长度
+				 if(num+10<=document.documentElement.clientWidth-76){
+					 console.log(fish.style.left);
+				     fish.style.left=(num+10)+"px";
+				}else{
+				     console.log("else:"+fish.style.left);
+				};
+			break;
+			 case 40:       //下键的键值为40
+			     num=parseInt(fish.style.top);       //可用屏幕的高度
+				 if(num+10<=document.documentElement.clientHeight){
+				     fish.style.top=(num+10)+"px";
+				};
+			break;
+		}
+	}
+   </script>
+   
+</body>
+</html>

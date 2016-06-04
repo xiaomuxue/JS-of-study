@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+   <pre>
+      获得焦点（获焦事件）：  focus
+      失去焦点(失焦事件)：  blur
+   </pre>
+   <div>
+     <p id="myp">当前最火的新闻</p>
+     <textarea id="myt"></textarea>
+   </div>
+   
+   <script>
+      var myp=document.getElementById("myp");
+	  var myt=document.getElementById("myt");
+	  myt.onfocus=function(){               //获焦事件：把它写活
+	     var str=myt.value;
+	     if(str.length<=140){
+	       myp.innerHTML="你还可以输入"+(140-str.length)+"个字";        
+	    }else{
+	       myp.innerHTML="你已经超出"+(str.length-140)+"个字";
+	    }
+	 }
+	  myt.onblur=function(){
+         myp.innerHTML="当前最火的新闻";
+	 }
+	 
+	 myt.onkeyup=function(){
+	   var str=myt.value;
+	   if(str.length<=140){
+	       myp.innerHTML="你还可以输入"+(140-str.length)+"个字";      //控制所输入文本的字数
+	   }else{
+	       myp.innerHTML="你已经超出"+(str.length-140)+"个字";
+	   }
+	}
+	
+	//真正的微博是使用keypress或者keydown
+   </script>
+   
+</body>
+</html>

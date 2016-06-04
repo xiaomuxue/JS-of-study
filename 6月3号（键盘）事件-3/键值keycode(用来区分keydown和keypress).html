@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+
+<body>
+
+   <!--fromCharCode():可接受一个指定的 Unicode 值，然后返回一个字符串。-->
+
+  <input type="text" value="keydown" id="inp1"/><br/><br/>
+  <input type="text" value="keypress" id="inp2"/>
+  
+  <script type="text/javascript">
+     var inp1=document.getElementById("inp1");
+	 var inp2=document.getElementById("inp2");
+	 inp1.onkeydown=function(event){
+//		 alert("aaa");
+	    var event=event ?event:window.event;
+		var keycode=event.keyCode;
+		var txt=String.fromCharCode(keycode);    //把输入的值转换为字符
+		console.log("keydown:"+txt);        //keydown输入的是小写，输出的变大写
+	};
+	
+	
+	inp2.onkeypress=function(event){
+       var event=event?event:window.event;
+	   //兼容firefox
+	   if(event.keyCode){
+	        var keycode=event.keyCode;
+			var txt=String.fromCharCode(keycode);
+		}else{
+		   //firefox
+		   var keycode=event.which;                 //取键值
+		   var txt=String.fromCharCode(keycode);
+		}
+		
+		console.log("keypress:"+txt);        //输入的是什么，就是什么
+	}
+  </script>
+  
+</body>
+</html>

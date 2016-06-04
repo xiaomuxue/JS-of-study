@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>制作快捷键enter直接进入注册</title>
+</head>
+
+<body>
+  <form action="" method="get">
+     <p>用户名：<input name="uname" type="text" maxlength="6" size="16" /></p>
+     <p>密 &nbsp; 码:<input name="password" type="password" maxlength="6" size="16" /></p>
+     <input name="btn" type="submit" value="注册"/>
+  </form>
+  
+  <script>
+    document.onkeydown=function(event){
+	   var event=event?event:window.event;
+	  // alert(event.keycode);
+	   if(event.keyCode==13){
+		   //回车键，提交表单
+		   document.getElementsByTagName("form")[0].submit();    //.submit();提交
+		}
+	}
+  </script>
+  
+</body>
+</html>

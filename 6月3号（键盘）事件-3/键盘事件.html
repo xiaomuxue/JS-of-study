@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>键盘事件</title>
+</head>
+
+<body>
+   <pre>
+      keydown:某个键盘按下被触发(先触发事件，再输出值)   不区分大小写
+      
+      keyup:(先显示内容，再触发)
+      
+      keypress:某个键盘按下被触发(先触发事件，再显示内容)    区分大小写
+      
+      键盘事件一般都是和input标签一起用的，因为是它只有输入
+      
+      键盘要做的兼容主要是针对火狐浏览器（firefox）
+      
+      keydown和keypress的区别：
+          keydown:用户在键盘上按下某键是发生。一直按着某键则会不断触发（opera浏览器除外）。
+          keypress:用户按下一个按键，并产生一个字符时发生（也就是不管类似shift、alt、ctrl之类的键，就是说用户按了一个能在屏幕上输出字符的按键keypress事件才会触发）。一直按着某按键则会不断触发。(对shift、alt、ctrl键没有用)
+          也就是说，keydown和keypress的区别在于，是否能监听用户按下ctrl、shift等功能键。keypress是监听不到这些功能键的（firefox除外），
+   </pre>
+   
+   <input type="text" id="txt"/>
+   
+   <script>
+       var txt=document.getElementById("txt");
+	   /*txt.onkeydown=function(){
+		 alert(txt.value);          //由此来验证keydown是先触发事件，再显示内容 
+		}*/
+		
+		txt.onkeypress=function(){
+		   /* alert("keypress事件被触发");      //这一句是为了验证是否会出现这句话
+			console.log("aaa");     */      //这一句是为了验证按着鼠标不放，它会一直执行多次
+			alert( txt.value );           //验证是先触发事件，再显示内容
+		}
+		
+		txt.onkeyup=function(){
+		    alert( txt.value );         //由此可验证出keyup是先显示内容再触发事件的
+		}
+   </script>
+</body>
+</html>
