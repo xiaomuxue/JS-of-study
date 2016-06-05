@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>oncharge事件</title>
+</head>
+
+<body>
+   oncharge:内容改变的时候触发事件，并不是时时监听，而是失去焦点的时候监听。
+   <input type="text" id="inp"/>
+   <select id="sel">
+      <option value="HN">湖南</option>
+      <option value="HB">湖北</option>
+      <option value="HN">海南</option>
+      <option value="JS">江苏</option>
+      <option value="GD">广东</option>
+      <option value="AH">安徽</option>
+      <option value="BH">北海</option>
+      <option value="JX">江西</option>
+      <option>西藏</option>
+      <option>天津</option>
+      <option>内蒙古</option>
+   </select>
+   <script>
+        var inp=document.getElementById("inp1");
+	    var sel=document.getElementById("sel");
+		
+		/*inp.onchange=function(){
+		     alert("内容改变");
+		}*/
+		
+		sel.onchange=function(){
+		    //value区option  value属性的值
+			//console.log(this.text);
+			
+			//获取到下拉列表的值
+			var index=this.selectedIndex;
+			//console.log(index);
+			console.log(this.options[index].value);
+			console.log(this.options[index].text);
+		}
+   </script>
+</body>
+</html>

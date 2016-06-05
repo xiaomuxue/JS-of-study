@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>失焦和获焦（onfocus  onblur）事件</title>
+</head>
+
+<body>
+   <input type="text" id="inp"/><span id="myspan"></span>
+   注意：onfocus/onblur两个事件并不支持所有的html对象
+   <script>
+        var inp=document.getElementById("inp");
+		var myspan=document.getElementById("myspan");
+		//获取焦点事件
+		inp.onfocus=function(){
+		   myspan.innerHTML="用户正在输入";
+		}
+		//失焦事件
+		inp.onblur=function(){
+		   myspan.innerHTML=inp.value;         //失焦时，获取input里面输入的值
+		}
+		//使span获取焦点，但是并没有用，获取不到
+		/*myspan.onfocus=function(){
+		    alert("a");
+		}*/          //这一段并没有什么用
+   </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>html的各种事件</title>
+</head>
+
+<body>
+   <img src="fish.gif"/>
+   onunload:卸载事件。网页关闭之前执行
+   
+   <script>
+      /* window.onload=function(){
+		   alert("资料正在加载中，请稍后。。。。");
+		}*/
+	//目前只支持IE浏览器（现在也兼容火狐了）    刷新页会触发这个事件
+	window.onunload=function(){
+	     //千万不要用alert
+		 //打开一个网页
+		 window.open("http://www.baidu.com");
+	}
+	//onunload值兼容IE，那么对firefox和google  onbeforeunlod
+	window.onbeforeunload=function(){
+	    //注意，此事件必须return
+		return "真的要离开嘛";     //多用于文本里面，有东西没有保存，对其进行提示
+	}
+   </script>
+</body>
+</html>

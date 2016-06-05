@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>模拟百度文库的复制粘贴</title>
+<style>
+   *{
+	   margin:0px auto;
+	   padding:0px;
+	 }
+    #mydiv{
+	   display:none;
+	   position:absolute;
+	   left:0;
+	   top:0;
+	   background:#fff;
+	   color:lime;
+	   border:1px solid gray;
+	   padding:5px;
+	}
+	#txt{
+	   width:800px;
+	   height:600px;
+	   border:none;
+	}
+	.span1{
+	   display:block;
+	   width:14px;
+	   height:11px;
+	   background:#fff url(http://static.wenku.bdimg.com/static/wkview/widget/api_share/img/panel_514568c.png) no-repeat 0 -30px;
+	   position:absolute;
+	   top:601px;
+	   left:10px;
+	   z-index:10;
+	}
+	.div1{
+	   background:#fff;
+	   border:1px solid #ccc;
+	}
+</style>
+</head>
+
+<body>
+   <textarea id="txt" readonly="yes">
+       测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字  测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字 测试文字 测试文字 测试文字 测试文字 测试文字 测试文字测试文字
+   </textarea>
+   <div id="mydiv">复制|搜索|翻译|百科|分享|二维码</div>
+   <span class="span1"></span>
+   <div id="div1">复制|搜索|翻译|百科|分享|二维码</div>
+   <script>
+      var txt=document.getElementById("txt");
+	  var mydiv=document.getElementById("mydiv");
+	  
+	  var x,y=0;      //鼠标的位置
+	  
+	  txt.onselect=function(event){
+	    // var event=event?event:window.event;
+		 //console.log( event.clientX);
+		 //设置div出现的位置
+		 mydiv.style.display="block";
+		 mydiv.style.left=x+"px";
+		 mydiv.style.top=y+10+"px";
+		 
+	}
+	 txt.onmouseup=function(event){
+	     var event=event?event:window.event;
+		 //console.log( event.clientX);
+		 //设置div出现的位置
+		 x=event.clientX;
+		 y=event.clientY;
+		 
+	}
+	
+	document.onmousedown=function(){
+	    mydiv.style.display="none";
+	}
+   </script>
+</body>
+</html>
