@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>音乐播放器（快捷键控制）</title>
+<style>
+  *{
+	  margin:0px auto;
+	  padding:0px;
+	}
+	body{
+	  width:800px;
+	}
+	audio{
+	   display:block;
+	   margin-top:20px;
+	}
+	input{
+	   padding:5px 20px;
+	   border-radius:5px;
+	   margin-top:10px;
+	}
+</style>
+</head>
+
+<body>
+   <audio src="Model Test 1.mp3" id="audio" controls>
+      对不起，您的浏览器不支持html5,请更新浏览器
+   </audio>
+   <input type="button" value="播放" onclick="playOrPause(this)" />
+   <input type="button" value="隐藏控制框" onclick="hideOrShowControls(this)" />
+   <input type="button" value="开启静音" onclick="muted(this)" />
+   <input type="button" value="获取播放时间" onclick="getCurrentTime()" />
+   <input type="button" value="音量+" id="upVol1" onclick="Vol('up')" />
+   <input type="button" value="音量-" id="upVol2" onclick="Vol('down')" />
+   当前音量：<span id="nowVol"></span>
+   
+   <script>
+      var audio;
+	  window.onload=function(){
+		  audio=document.getElementById("audio");
+		  document.getElementById("nowVol").innerHTML=audio.volume*100;  
+	  }
+	  //播放
+	  function playOrPause(obj){         //.paused();audio里面控制播放的属性
+	     if(audio.paused){
+		     audio.play();
+			 obj.value="暂停";
+		}else{
+		   audio.pause();
+		   obj.value="播放";
+		}
+	  }
+	  
+	  //显示隐藏控件
+	  function hideOrShowControls(obj){      
+	     if(audio.controls){                      //.controls();audio里面控制显示框的属性
+		     audio.removeAttribute("controls");
+			 obj.value="显示控件框"
+		}else{
+		   audio.controls="controls";
+		   obj.value="隐藏控件框";
+		}
+	}
+	
+	//开启静音
+	function muted(obj){
+	   if(audio.muted){                    //.muted();audio里面控制静音的属性
+	       audio.muted=false;
+		   obj.value="开启静音";
+	   }else{
+	       audio.muted=true;
+		   obj.value="关闭静音";
+	   }
+	}
+	
+	//获取播放时间
+	function getCurrentTime(obj){               //CurrentTime();audio里面控制播放时间的属性
+		alert( audio.currentTime+':秒');
+	}
+	
+	//控制音量
+	function Vol(type){             //音量的取值：0-1
+	   if(type=='up'){
+	     var volume=audio.volume+0.1;            //volume();audio里面控制音量的属性
+		 if(volume>=1){                      
+		    volume=1;
+		}
+		audio.volume=volume;
+	   }else if(type=='down'){
+	       var volume=audio.volume-0.1;
+		   if(volume<=0){
+		      volume=0;
+		}
+		audio.volume=volume;   
+	  }
+	  document.getElementById("nowVol").innerHTML=parseInt(audio.volume*100);       //获取nowVol文本里面的时间值，由于它的取值是0-1，故对它乘以100，使它取值确定为整数，用parseInt取整。
+	}
+	
+	
+	//快捷键
+	document.onkeydown=function(event){
+	   var event=event?event:window.event;
+	   var keycode=event.keyCode;
+	   /*
+	       空格   ->    播放暂停
+		   shift+s  ->  显示隐藏控制台
+	   */
+	   
+	   if(keycode==32){
+	       playOrPause(document.getElementsByTagName("input")[0]);
+	   }
+	   // shift+s  ->  显示隐藏控制台
+	   if(event.shiftKey && keycode==83 ){
+		   hideOrShowControls(document.getElementsByTagName("input")[1]);
+		}
+		//  ctrl  +  右      (快进)
+		if(event.ctrlKey && keycode==39 ){
+		    audio.currentTime=audio.currentTime+5;      
+		}
+		//audio.ended     用来判断是否播放完毕
+		//audio.currentTime==duration
+		window.setInterval(function(){       //setInterval(function(){},1000)指每隔一秒调用一次匿名函数          setInterval动作的作用是在播放动画时，每隔一定时间就调用函数，方法或对象。可以使用本动作更新来自数据库的变量或更新时间显示。
+	       if(audio.ended){
+		       //alert("已经播放完毕");
+			   //播放下一首
+			   //简单的说，改变src属性值，然后autoplay
+		   }
+		},1000);
+	}
+   </script>
+</body>
+</html>
