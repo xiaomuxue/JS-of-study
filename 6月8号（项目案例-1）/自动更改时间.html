@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>自动更改时间</title>
+</head>
+
+<body>
+  
+ <p id="timer"></p>
+  
+  <script type="text/javascript">
+	window.onload = function(){
+		time_fn();
+	}
+	  function checkTime(num){
+	    if(parseInt(num) < 10){
+	  	   num = "0" + num;
+	    }
+	  	   return num;
+	  }
+	  function time_fn(){
+	  var timer = document.getElementById('timer');
+	  var time = new Date();
+	  var year = time.getFullYear() + "年";
+	  var mouth = time.getMonth() + 1 + "月";
+	  var day = time.getDate() + "日";
+	  var arr = new Array;
+	  var weekday = time.getDay();
+	  var h = time.getHours() + "时";
+	  var m = time.getMinutes() + "分";
+	  var s = time.getSeconds() + "秒";
+	  m = checkTime(m);
+	  s = checkTime(s);
+	  arr[0] = ["星期日"];
+	  arr[1] = ["星期一"];
+	  arr[2] = ["星期二"];
+	  arr[3] = ["星期三"];
+	  arr[4] = ["星期四"];
+	  arr[5] = ["星期五"];
+	  arr[6] = ["星期六"];
+	  for(var i = 0; i < arr.length; i++){
+	  	weekday = arr[i];
+	  }
+	  timer.innerHTML = year + mouth + day + "&" + "nbsp" + weekday + "<br />" 
+	  + h + m + s;
+	  setTimeout(time_fn,500);
+	}
+	</script>
+
+</body>
+</html>

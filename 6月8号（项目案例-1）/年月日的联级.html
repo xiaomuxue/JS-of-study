@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>年月日的联级</title>
+</head>
+
+<body>
+   <select id="sel">
+      <option id="years" onchages="yearsmonths(this.value)">年</option>
+      <!--<option>2015</option>
+      <option>2014</option>
+      <option>2013</option>
+      <option>2012</option>
+      <option>2011</option>
+      <option>2010</option>-->
+   </select>
+   <select>
+      <option id="months" onchages="monthsdays(this.value)">月</option>
+      <!--<option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>-->
+   </select>
+   <select>
+      <option id="days">日</option>
+      <!--<option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>-->
+   </select>
+   
+   <script>
+     /* var year=document.getElementById("year");
+	  var years=document.createElement("option");
+	  var year1=document.getElementsByTagName("select")[0];
+	  year.onchange=function(){
+		 // alert("a")
+		    for(var i=1900;i<2016;i++){
+		        years.innerHTML="1900";
+				year1.appendChild(years);
+			}
+	  }*/
+	  
+	 /* window.onload=function(){
+		 var years=document.getElementById("years");
+		 var months=document.getElementById("months");
+		 var days=document.getElementById("days");
+		 
+	     var stryears=document.select.years.outerHTML;
+		 var strmonths=document.months.outerHTML;
+		 var strdays=document.days.outerHTML;
+		 Monday=[31,28,31,30,31,30,31,30,31,30,31,30];
+		 
+		 //给年下拉列表赋内容
+		 var years=new Date().getFullYear();       //getFullYear()方法一般都结合Date()一起使用，getFullYear()可返回一个表示年份的4位数字
+		 var str=stryears.substring(0,stryears.length-9);    //substring(from,to)：用于返回一个字符串的子串
+		 for(var i=(years-30);i<(years+30);i++){
+		     str+="<option>"+i+"</option>";
+		 }
+		 document.years.outerHTML=str+"</select>";
+		 
+		 var str=strmonths.substring(0,strmonth.length-9);
+		 for(var i=1;i<13;i++){
+		    str+="<option>"+i+"</option>";
+		 }
+		 document.months.outerHTML=str+"</select>";
+         document.years.outerHTML=years;
+		 
+		 var months=new Date().getMonth();
+		  
+		 var str=strdays.substring(0,strdays.length-9);
+		 
+	}*/
+	   
+   </script>
+</body>
+</html>

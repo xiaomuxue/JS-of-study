@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片轮换</title>
+	<style type="text/css">
+		*{
+			background:transparent;
+			border:0;
+			margin:0;
+			padding:0;
+		}
+
+		ul{
+			list-style-type: none;
+		}
+
+		body{
+			background-color:#dfdfdf;
+		}
+
+		.maintype_left{
+			margin:10px 0 0 11px;
+			width:545px;
+			height:260px;
+		}
+
+		.scroll_mid{
+			background-color:#f2f2f3;
+			border-left:solid 1px #d6d5d6;
+			border-right:solid 1px #d6d5d6;
+			width:535px;
+			height:250px;
+			padding:5px 5px 5px 5px;
+			float:left;
+		}
+
+		#pic{
+			float:right;
+			width:535px;
+			height:250px;
+		}
+
+		#scroll_number{
+			clear:both;
+			padding-right:10px;
+			display:inline;
+		}
+
+		#scroll_number li{
+			width:20px;
+			line-height:16px;
+			text-align:center;
+			border:solid 1px #999;
+			margin-top:5px;
+			font-size:12px;
+			float:left;
+		}
+			
+		.scroll_number_out{
+			background-color:#f2f2f3;
+		}
+			
+		.scroll_number_over{
+			background-color:#F96;
+			color:#FFF;
+		}
+		#lefts,#rights{
+		   width:120px;
+		   height:100%;
+		   position:absolute;
+		   display:none;
+		   opacity:0.5;
+		   top:0;
+		}
+		#lefts{
+		   left:0;
+		   background: #eee url(images/left.jpg) no-repeat left center;
+		}
+		#rights{
+		   right:0;
+		   background: #eee url(images/right.jpg) no-repeat right center;
+		}
+	</style>
+</head>
+<body>
+	<div class="maintype_left">
+		<div class="scroll_mid">
+			<img src="images/pic_1.jpg" id="pic" />
+			<ul id="scroll_number">
+				<li onMouseOver="show(1)" onMouseOut="start()">1</li>
+				<li onMouseOver="show(2)" onMouseOut="start()">2</li>
+				<li onMouseOver="show(3)" onMouseOut="start()">3</li>
+				<li onMouseOver="show(4)" onMouseOut="start()">4</li>
+				<li onMouseOver="show(5)" onMouseOut="start()">5</li>
+				<li onMouseOver="show(6)" onMouseOut="start()">6</li>
+			</ul>
+            <i id="lefts"></i>
+            <i id="rights"></i>
+		</div>
+	</div>
+    
+    
+    <script type="text/javascript">
+        var time=winodw.setInterval("show()",2000); 
+		var index=1;
+		
+		function show(id){
+		   if(id){
+		       //onmouseover
+			   index=id;
+			   //清除定时器
+			   clearInterval(time);
+		   }else{
+		       index=index%6+1;       //每六张循环一次
+		   }
+		   //设置图片
+		   document.getElementById("pic").setAttribute("src","images/pic_"+index+".jpg");
+		   var lis=document.getElementsByTagName("li");
+		   //scroll_number_over    代表当前的图片
+		   for(var i=0;i<lis.length;i++){
+		       lis[i].setAttribute("class","scroll_number_out");
+			   if(i==index-1){
+			       lis[i].setAttribute("class","scroll_number_over"); 
+			   }
+		   }
+		   
+		   function start(){
+		       time=window.setInterval("show()",2000);
+		   }
+		   
+		   var lefts=document.getElementById("lefts");
+		   var rights=document.getElementById("rights");
+		   
+		   var mybox=document.getElementsByClassName("scroll_mid")[0];
+		   mybox.onmousemove=function(event){
+		      var event=event?event:window.event;
+			  //因为clientX获取到的坐标是相对屏幕的，而我们要的是div盒子里面的坐标，所以
+			  //要减去div盒子left的一个值
+			 var x=event.clientX-mybox.getBoundingClientRect().left;
+			 if(x>0 && x<this.clientWidth/2){
+			     lefts.style.display="block";
+				 rights.style.display="none";
+			}else if( x>=this.clientWidth/2 && x<this.clientWidth){
+			     rights.style.display="block";
+				 lefts.style.display="none";
+			}
+		  }
+		   
+		}
+    </script>
+	
+</body>
+</html>
