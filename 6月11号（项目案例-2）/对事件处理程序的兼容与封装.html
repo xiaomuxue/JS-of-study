@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>对事件处理程序的兼容与封装</title>
+</head>
+
+<body>
+
+   <input type="button" value="处理程序" id="btn"/>
+
+   <script type="text/javascript">
+       function addHandler(element,type,handler){
+	       //功能性检测
+		   if(element.addEventListener){
+		       //DOM2级
+			   element.addEventListener(type,handler,false);
+		   }else if(element.attachEvent){
+		       element.attachEvent("on"+type,handler);
+		   }else{
+		       //DOM0级
+			   //   element.onclick  ->   element["onclick"]
+			   element["on"+type]=handler;
+		   }
+	  }
+	  
+	  function delHandler(element,type,handler){
+	      //功能性检测
+		  if(element.addEventListener){
+		     //DOM2级
+			 element.removeEventListener(type,handler,false);
+		  }else if(element.attachEvent){
+		      //IE
+			  element.detachEvent("on"+type,handler); 
+		  }else{
+		       //DOM0级
+			   //   element.onclick  ->   element["onclick"]
+			   element["on"+type]=null;
+		   }
+	  }
+	  
+	  var btn=document.getElementById("btn");
+	  addHandler(btn,"click",show);
+	  function show(){
+	       alert("aaa");
+	  }
+   </script>
+</body>
+</html>

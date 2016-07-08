@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>完全封装</title>
+</head>
+
+<body>
+   <script type="text/javascript">
+       var eventUtil={
+	      //添加事件
+		  addHandler:function(element,type,handler){
+		     //功能性检测
+			 if(element.addEventListener){
+		         //DOM2级
+				 element.addEventListener(type,handler,false);
+			 }else if(element.attachEvent){
+			     //IE
+				 element.attachEvent("on"+type,handler);
+			 }else{
+		         //DOM0级
+				 //    element.onclick   ->  element["onclick"]
+				 //element["on"+type]=null;
+				 element["on"+type]=handler;
+			 }
+		  },
+		  
+		  //删除事件
+		  delHandler:function(element,type,handler){
+		       //功能性检测
+			 if(element.addEventListener){
+		       //DOM2级
+			   element.addEventListener(type,handler,false);
+			  }else if(element.attachEvent){
+			      //IE
+				  element.attachEvent("on"+type,handler);
+			  }else{
+			     element["on"+type]=null;
+			  }  
+		  },
+		  
+		  //阻止浏览器的默认行为
+		  preventDefault:function(event){
+		      var event=event?event:window.event;
+			  if(event.preventDefalut){
+			      event.preventDefault();
+			  }else{
+			      event.returnValue=false;       
+			  }
+		  },
+		  //阻止事件冒泡
+		  stopPropagation:function(event){
+		     var event=event?event:window.event;
+			 if(event.stopPropagation){
+		         event.stopPropagation();
+			 }else{
+			     event.cancelBubble=true;         //IE阻止事件冒泡
+			 }
+		  }
+	  } 
+   </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>事件对象</title>
+</head>
+
+<body>
+    stopPropagation(阻止事件冒泡)和preventDefault（阻止浏览器默认行为）
+    
+     <div id="oDiv">
+       <p id="oP">
+           <span id="oSpan">请点击我</span>
+       </p>
+    </div>
+    <a href="完全封装.html" id="mya">请点击我</a>
+    <a href="javascript:add()" id="myb">请点击我</a>
+    <a href="javascript:void(0)" id="myc">请点击我</a>
+    <script type="text/javascript">
+       var oDiv=document.getElementById("oDiv");
+	   var oP=document.getElementById("oP");
+	   var oSpan=document.getElementById("oSpan");
+	   
+	   oDiv.onclick=function(){
+		   alert("div被点击");
+		}
+		oP.onclick=function(){
+		   alert("oP被点击");
+		}
+		oSpan.onclick=function(){
+	       alert("oSpan被点击");
+		   //阻止冒泡
+		   event.stopPropagation();
+		}
+		
+		var mya=document.getElementById("mya");
+		mya.onclick=function(event){
+	       //阻止浏览器的默认行为
+		   event.preventDefault();
+		   alert("aaa");
+		}
+		
+		function add(){
+		    alert("bbb");
+		}
+	   
+    </script>
+</body>
+</html>

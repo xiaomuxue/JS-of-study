@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>消图片的小案例</title>
+<style>
+   #wrap{
+      width:500px;
+	  height:500px;
+	  border:1px solid #eee;
+	  background:url(img/1.jpg);
+	  background-size:500px 500px;
+	  position:relative;
+   }
+   #wrap div{
+      width:50px;
+	  height:50px;
+	  background:url(img/2.jpg);
+	  background-size:50px 50px;
+	  position:absolute;
+	  transition:1s;
+   }
+</style>
+</head>
+
+<body>
+   <div id="wrap"></div>
+   
+   <script type="text/javascript">
+       var wrap=document.getElementById("wrap");
+	   var l=0;     //left
+	   var t=0;     //top
+	   var str="";       //采用字符串拼接的形式插入div
+	   for(var i=0;i<100;i++){
+	       //计算位置
+		   l=(i%10)*50;       //0 ->  0    1->50     9->450    10->0
+		   t=Math.floor(i/10)*50;         
+		   //向下取整
+		   str+="<div style='left:"+l+"px;top:"+t+"px;'></div>"
+	   }
+	   wrap.innerHTML=str;
+	   
+	   //获取到所有的小格子
+	   var divs=wrap.getElementsByTagName("div");
+	   for(var i=0;i<divs.length;i++){
+	       divs[i].onmouseover=function(){
+		       this.style.opacity=0;                 //给它设置一个透明度
+			   this.style.transform="scale(0)";      //给图片设置一个缩小
+		   }
+	   }
+   </script>
+</body>
+</html>

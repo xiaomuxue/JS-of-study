@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>事件冒泡（事件流）</title>
+
+</head>
+
+<body>
+   <pre>
+       事件流：描述的是从网页中接受事件的顺序。
+       JS事件流分为三种：事件冒泡、事件捕获、DOM事件流。
+         事件冒泡：事件开始时由最具体的元素接收，然后逐级向上传播到较为不具体的节点（文档）。
+         事件捕获：事件捕获是网景（Netscape）提出来的，事件捕获是不太具体的元素应该更早接受到事件，而最具体的节点应该最后接收到事件。
+         DOM事件流：DOM2级中规定了事件流要包括三个阶段：
+           事件捕获阶段、处于目标阶段、事件冒泡阶段。
+       浏览器的默认事件流一般都是事件冒泡。
+       没有浏览器的默认事件流为事件捕获。
+       事件冒泡是从内到外冒；  事件捕获是从外到内。
+       IE8以下是没有事件捕获的
+   </pre>
+   <div id="oDiv">
+       <p id="oP">
+           <span id="oSpan">请点击我</span>
+       </p>
+   </div>
+   
+   <script type="text/javascript">
+       var oDiv=document.getElementById("oDiv");
+	   var oP=document.getElementById("oP");
+	   var oSpan=document.getElementById("oSpan");
+	 /*  oDiv.onclick=function(){
+	       alert("我是oDiv,你点我了");
+	   }
+	   oP.onclick=function(){
+	       alert("我是oP,你点我了");
+	   }
+	   oSpan.onclick=function(){
+	       alert("我是oSpan,你点我了");
+	   }       
+	   //以上可以说明事件冒泡的方式*/
+	   
+	   oDiv.addEventListener("click",function(){
+	       console.log("div被点击，事件捕获");
+	  },true);
+	   oP.addEventListener("click",function(){
+	       console.log("p被点击，事件捕获");
+	  },true);
+	   oSpan.addEventListener("click",function(){
+	       console.log("span被点击，事件捕获");
+	  },true);
+	  //false是指在事件捕获阶段被捕获
+	   oDiv.addEventListener("click",function(){
+	       console.log("div被点击，事件冒泡");
+	  },false);
+	   oP.addEventListener("click",function(){
+	       console.log("p被点击，事件冒泡");
+	  },false);
+	   oSpan.addEventListener("click",function(){
+	       console.log("span被点击，事件冒泡");
+	  },false);
+	  //两种结合在一起，就形成了DOM事件流。
+   </script>
+</body>
+</html>
