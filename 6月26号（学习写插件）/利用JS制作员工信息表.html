@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>利用JS制作员工信息表</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/*	function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		Person.prototype={
+           showInfo:function(){
+                return this.name+"-----"+this.age;       //调用此函数时，就可直接输出姓名和年龄
+           },
+		};
+
+        function emp(){}
+		// emp.prototype=Person.prototype;
+		emp.prototype=new Person();
+		emp.prototype.pay=function(){
+               return salary;
+		}
+		
+
+         emp.prototype.constructor=emp;
+  
+		var p=new Person('smith',20,40000);
+		p.showInfo();
+		p.pay();
+	*/
+
+     function Person(name,age){
+     	this.name=name;
+     	this.age=age;
+     }
+
+     Person.prototype={
+     	showInfo:function(){
+     		document.write("姓名："+this.name+"年龄："+this.age);
+     	}
+     };
+     function Emp(name,age,salary){
+     	Person.call(this,name,age);
+     	this.salary=salary;
+     }
+     Emp.prototype=new Person();
+     Emp.prototype.pay=function(){
+     	document.write("姓名："+this.name+"年龄："+this.age+"薪水："+this.salary);
+     }
+    
+    var p=new Emp('smith',20,40000);
+    p.showInfo();
+    p.pay();
+	</script>
+</body>
+</html>

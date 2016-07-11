@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.redText{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function TreeItem(text,link,icon){
+			this.text=text;
+			this.link=link;
+			this.icon=icon;
+			this.sonItems=[];
+		}
+
+		//扩展功能
+		TreeItem.prototype={
+			//添加  子节点的功能
+			attributes:{
+				className:'',
+			},
+			addSonItem:function(sonItem){
+				this.sonItems.push(sonItem);
+				
+			},
+			getSonItemCount:function(){
+				return this.sonItems.length;
+			},
+			getAllSonItem:function(){
+				return this.sonItems;
+			},
+			showItem:function(){
+				//判断 sonItems的长度<=0;
+				// 输出  <li>text</li>
+				// 否则
+				//  输出 <li>text
+				//  //输出<ul>
+				//  //循环  sonItems的子节点
+				//  //输出</ul>
+				//  //输出</li>
+				if(this.sonItems.length<=0){
+					document.write("<li ");
+					if(this.attributes.className){
+						document.write(" class='"+this.attributes.className+"'")
+					}
+					document.write(">");
+					if(this.link){
+						document.write("<a href='"+this.link+"'>");
+					}
+					document.write(this.text);
+					if(this.link){
+						document.write("</a>");
+					}
+					document.write("</li>");
+					return ;
+				}
+				document.write("<li>"+this.text);
+					document.write("<ul>");
+					for(var i=0;i<this.sonItems.length;i++){
+						var si=this.sonItems[i];
+						si.showItem();
+					}
+					document.write("</ul>");
+				document.write("</li>");
+				
+			}
+		};
+
+		var root=new TreeItem('root','','');
+		root.attributes.className='redText';
+		
+		var t1=new TreeItem('t1','','');
+		
+		var t11=new TreeItem('t11','','');
+
+
+		var t111=new TreeItem('baidu','http://www.baidu.com','');
+		t11.addSonItem(t111);
+
+		var t12=new TreeItem('t12','','');
+		t1.addSonItem(t11);
+		t1.addSonItem(t12);
+
+		var t2=new TreeItem('t2','','');
+
+		root.addSonItem(t1);
+		root.addSonItem(t2);
+
+		alert(root.getSonItemCount());
+
+		var allitems=root.getAllSonItem();
+		for(var i=0;i<allitems.length;i++){
+			alert(allitems[i].text);
+		}
+
+		root.showItem();
+	</script>
+</body>
+</html>

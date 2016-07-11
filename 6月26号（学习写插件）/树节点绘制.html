@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>写组件（树节点的绘制）</title>
+	<style>
+       .redText{
+       	  color:red;
+       }
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function TreeItem(text,link,icon){
+		   this.text=text;
+		   this.icon=icon;
+		   this.link=link;
+		   this.sonItems=[];
+		}
+		//扩展功能：
+		TreeItem.prototype={
+			attributes:{
+				className:'',
+			},
+           //添加   子节点的功能
+           addSonItem:function(sonItem){
+           	   this.sonItems.push(sonItem);      //利用push添加子节点
+           },       //下面还可以不断的添加功能
+           getSonItemCount:function(){
+              return this.sonItems.length;
+           },
+           getAllSonItem:function(){
+              return this.sonItems;    //若是你想它以字符串的形式一个一个的输出，则可改为this.sonItems.join(',');
+           },
+           showItem:function(){
+           	 //判断    sonItems的长度《=0；
+           	 if(this.sonItems.length<=0){
+           	 	document.write("<li");         //字符串的拼接
+           	 	if(this.attributes.className){
+           	 		document.write("class='"+this.attributes.className+"'")
+           	 	}
+           	 	document.write(">");
+           	 	if(this.link){            //在叶子节点下加入超链接
+           	 		document.write("<a href='"+this.link+"'>");
+           	 	}
+           	 	document.write(this.text);          //把文本输出来
+           	 	if(this.link){
+           	 		document.write("</a>");         //结束超链接
+           	 	}
+           	 	document.write("</li>");
+           	 	return;
+           	 }
+
+           	 document.write("<li>"+this.text);
+           	    document.write("<ul>");
+           	    for(var i=0;i<this.sonItems.length;i++){
+           	 	    var si=this.sonItems[i];
+           	 	    si.showItem();
+           	    }
+
+           	    document.write("</ul>");
+           	 document.write("</li>");
+           	 //      输出   <li>text</li>
+           	 //      否则
+           	 //      输出  <li>text
+           	 //                   输出  <ul>
+           	 //                   循环  sonItems  的子节点
+           	 //                   输出  </ul>
+           	 //      输出</li>
+           // 	 if(sonItems.length<=0){
+           // 	 	document.write( "'<li>'+text+'</li>'" );
+           // 	 }else{
+           // 	 	document.write( "'<li>'+text+'<ul>'" );
+           // 	     for(var i=0;i<allitems.length;i++){
+           // 	     	document.write(allitems[i].text);
+           // 	     }
+           // 	     document.write("'</ul>'+'</li>'");
+           // 	 }       //一层 if{}else{}，可以把else{}去掉，在if{}里面的最后面加个return;
+           	 
+           // }
+           }
+		};
+
+		var root=new TreeItem('root','','');
+		root.attributes.className='redText';
+
+		var t1=new TreeItem('t1','','');
+
+		var t11=new TreeItem('t11','','');
+
+		var t111=new TreeItem('baidu','http://www.baidu.com','');
+		t11.addSonItem(t111);
+
+		var t12=new TreeItem('t12','','');
+        t1.addSonItem(t11);
+		t1.addSonItem(t12);
+
+
+		var t2=new TreeItem('t2','','');
+		
+
+		root.addSonItem(t1);
+		root.addSonItem(t2);
+
+        alert( root.getSonItemCount());
+
+        var allitems=root.getAllSonItem();
+        for(var i=0;i<allitems.length;i++){
+        	alert( allitems[i].text );
+        }
+
+        root.showItem();
+	</script>
+</body>
+</html>

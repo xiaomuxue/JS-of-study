@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绘制能传参的表格</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/*	function YcTable(data){
+			this.data=data;
+		}
+
+		YcTable.prototype={
+			showTable:function(){
+				var table=document.createElement("table");        //创建表格table节点
+				table.setAttribute("border","400px");        //设置表格的属性
+				table.setAttribute("cellpadding","0px");
+				table.setAttribute("cellspacing","0px");
+				var str="";                  //定义一个字符串，用来拼接表格的行和列
+
+				for(var i=0;i<data.length;i++){          //使用一个for循环设置行数
+					str+="<tr>";                   //使用字符串拼接的方式，把行数拼起来
+					for(var j=0;j<=2;j++){         //同样使用一个for循环，求出列数
+						str+="<td>"+data[i][j]+"</td>";      //传参：把数据（信息）填到每行当中去
+					}
+					str+="</tr>";        //字符串拼接行的结束
+				}
+				table.innerHtml=str;     //把信息以html形式写到表格中去
+				document.body.appendChild(table);      //在body最后面结束表格
+			},
+			getTotal:function(){         //行
+				return this.data.length;
+			},
+			getColumnCount:function(){       //列
+				// return data.length;
+				return Object.keys(this.data[0]).length;      //非常精简的代码
+			},
+			getValue:function(){             
+				return this.data.value;
+			}
+		}
+
+
+		var data=[{"name":"zy","age":"20"},{"name":"zy","age":"20"},{"name":"zy","age":"20"}];
+
+		var ycTable=new YcTable(data);
+
+		ycTable.showTable();
+
+		*/
+	
+//修改版的
+	function YcTable(data){
+		this.data=data;
+	}
+
+	YcTable.prototype={
+		showTable:function(){
+			var Data=this.data;
+			var table=document.createElement("table");
+			table.setAttribute("border","1");
+			table.setAttribute("width","300");
+			var th=document.createElement("tr");
+
+			for(var i=0;i<this.getColumnCount();i++){
+				var td=document.createElement("td");
+				td.innerHTML=this.getColumnNames()[i];
+				th.appendChild(td);
+			}
+			table.appendChild(th);
+
+			for(var i=0;i<this.getTotal();i++){
+				var tr=document.createElement('tr');
+				for(var keys in Data[i]){
+					td=document.createElement('td');
+					td.innerHTML=Data[i][keys];
+					tr.appendChild(td);
+				}
+				table.appendChild(tr);
+			}
+			document.body.appendChild(table);
+		},
+		getTotal:function(){
+		   return this.data.length;   //行
+		},
+		getColumnCount:function(){    //列
+            return Object.keys(this.data[0]).length;
+		},
+		getColumnNames:function(){    //列名
+			return Object.keys(this.data[0]);
+		},
+		getValue:function(){
+			var values=[];
+			for(var i=0;i<this.getTotal();i++){
+				for(var keys in this.data[i]){
+					values.push(this.data[i][keys]);
+				}
+			}
+			return values;
+		}
+	};
+
+	var data=[{"name":"zm","age":"18"},{"name":"ll","age":"19"},{"name":"lm","age":"21"},]
+	var ycTable=new YcTable(data);
+	// alert(ycTable.getValue());
+	ycTable.showTable();
+
+	</script>
+</body>
+</html>
