@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>案例_用canvas画房子</title>
+
+</head>
+
+<body>
+	<canvas id="myCanvas" height="800px" width="800px"></canvas>
+    
+    <script type="text/javascript">
+		//定义一个点的对象		(x,y)
+		function Point(x,y){
+			this.x=x;
+			this.y=y;
+		}
+		//定义一个线的对象  (p1,p2, 长度：勾股定理)
+		function Line(p1,p2){
+			this.p1=p1;
+			this.p2=p2;
+			//利用勾股定理求线长
+			this.length=Math.sqrt( Math.pow(p1.x-p2.x,2)+Math.pow(p1.y-p2.y,2) );//Math.sqrt(x)：求平方根
+		}
+		//定义一个形状对象（由n个点和n条线组成）
+		function Shape(){
+			this.points=[];
+			this.lines=[];//说明用户已经把它初始化
+			this.init();//在自己本身内部去找init
+		}
+		
+		//定义所有形状的功能
+		//初始化，绘制，获取颜色，获取所有的线，获取所有的点，周长，面积
+		Shape.prototype={
+			init: function(){//初始化形状
+					if( (typeof this.context)=='undefined'){
+						var canvas=document.getElementById('myCanvas');
+						this.context=canvas.getContext('2d');
+					}
+				},
+			draw: function(){//绘制
+					//利用context来完成绘制，看线和点的位置，取出颜色
+					var ctx=this.context;
+					ctx.strokeStyle=this.getColor();
+					ctx.beginPath();
+					ctx.moveTo(this.points[0].x,this.points[0].y);
+					for(var i=1;i<this.points.length;i++){
+						ctx.lineTo(this.points[i].x,this.points[i].y);	
+					}
+					ctx.closePath();
+					ctx.stroke();
+				},
+			getColor: function(){//Math.random()范围：0-1
+					//输出颜色（颜色值随机生成   Math.random()*255）
+					var cs=[];//定义一个装颜色的数组
+					for(var i=0;i<3;i++){
+						cs[i]=Math.round( Math.random()*255 ) ;//四舍五入
+					}
+					return 'rgb(' + cs.join(',') + ')';//用逗号把数组里的所有元素连接成一个字符串
+				},
+			getLines: function(){
+					//判断lines是否为空，如果为空，则要判断points是否为空
+					if(this.lines.length>0){
+						return this.lines;
+					}
+					//如果points不为空，则要根据点来生成线
+					var lines=[];//因为此时lines为空，所以定义一个lines，根据点来绘制这个线，返回定义的lines
+					if( this.points.length<=0){//this.points：哪个对象调用getLines这个函数，就会找这个对象的points
+						return lines;
+					}
+					for(var i=0;i<this.points.length;i++){
+						lines[i]=new Line(this.points[i],(this.points[i+1])?this.points[i+1]:this.points[0]);//一个点可以产生一条线，线的起点和终点是同一点
+						//这里每循环一次，就产生一个新的线对象
+					}
+					this.lines=lines;
+					return this.lines;
+				},
+			getPoints: function(){
+					return this.points;
+				},
+			getParimeter: function(){
+					//获取周长，肯定有返回值
+					//循环  this.lines数组，取出每一条line，再取出它的length属性值相加
+					var lines=this.getLines();
+					var perim=0;
+					for(var i=0;i<lines.length;i++){
+						perim+=lines[i].length;
+					}
+					return perim;
+				},
+			getArea:function(){}
+		}
+		
+		
+		function Triangle(p1,p2,p3){
+			this.points=[p1,p2,p3];	
+			Shape.prototype.getArea=function(){
+				var p=this.getParimeter()/2;
+				var a=this.getLines()[0].length;
+				var b=this.getLines()[1].length;
+				var c=this.getLines()[2].length;
+				return Math.round( Math.sqrt(p*(p-a)*(p-b)*(p-c)) );//海伦公式求面积
+			}
+		}
+
+		//定义长方形的函数：根据一个点和两条边找出它的四个点的位置
+		function Rectangle(a,l,w){
+			var p2=new Point( a.x+l,a.y );
+			var p3=new Point( a.x+l,a.y+w );
+			var p4=new Point( a.x,a.y+w );
+			this.points=[a,p2,p3,p4];
+
+			this.getArea=function(){
+				return l*w;
+			}
+		}
+
+		//正方形方案一：根据一个点和一条边找出其四点的位置
+		function Square1(a,l){
+			var p2=new Point( a.x+l,a.y );
+			var p3=new Point( a.x+l,a.y+l );
+			var p4=new Point( a.x,a.y+l );
+			this.points=[a,p2,p3,p4];
+			
+			this.getArea=function(){
+				return l*l;
+			}
+		}
+
+		//正方形方案二：Square2 继承自 Rectangle
+		function Square2(a,l){
+			Rectangle.call(this,a,l,l);
+			//当调用Square2构造函数时，通过call(将被用作当前对象的对象[,将被传递方法参数序列])来调用Rectangle的构造函数
+		}
+
+		//画圆
+		function drawCircle(p1,r){
+			this.r=r;
+			var ctx=this.context;
+			ctx.strokeStyle=this.getColor();
+			ctx.beginPath();
+			ctx.moveTo(p1.x+r,p1.y);
+			ctx.arc(p1.x,p1.y,r,0,2*Math.PI,false);
+			ctx.stroke();
+			Shape.prototype.getArea=function(){
+				return Math.round(Math.PI*r*r);
+			}
+		}
+		
+		//继承
+		(function(){//函数的自调用
+				var s=new Shape()
+				Triangle.prototype=s;
+				Rectangle.prototype=s;
+				Square1.prototype=s;
+				Square2.prototype=s;
+				drawCircle.prototype=s;
+			}
+		)()
+		
+		//测试
+		//创建三个点对象
+		var p1=new Point(100,100);
+		var p2=new Point(200,200);
+		var p3=new Point(0,200);
+		
+		//创建一个三角形对象
+		var t1=new Triangle(p1,p2,p3);
+		/*alert("周长："+t1.getParimeter());
+		alert("颜色："+t1.getColor());
+		alert("所有的点："+t1.getPoints());
+		alert("所有的线："+t1.getLines());*/
+		t1.draw();//三角形对象调用draw方法
+		console.log("房顶的面积为："+t1.getArea());
+		
+		//大正方形墙
+		var a1=new Point(0,200);
+		var s1=new Square1(a1,200);
+		s1.draw();
+		console.log("墙的面积为："+s1.getArea());
+
+		//小正方形窗户
+		var a2=new Point(20,230);
+		var s2=new Square2(a2,50);
+		s2.draw();
+		console.log("窗户面积为："+s2.getArea());
+
+		//长方形门
+		var a3=new Point(120,300);
+		var s3=new Rectangle(a3,50,100);
+		s3.draw();
+		console.log("门的面积为："+s3.getArea());
+
+		var p3=new Point(160,350);
+		var r=5;
+		var s4=new drawCircle(p3,r);
+		console.log("门锁的面积为："+s4.getArea());
+
+	</script>
+</body>
+</html>

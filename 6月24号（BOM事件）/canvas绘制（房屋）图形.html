@@ -1,0 +1,223 @@
+<!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>canvas绘制（房屋）图形</title>
+   </head>
+
+   <body>
+      <canvas id="canvas" width="800px" height="800px"></canvas>  
+      
+       <script type="text/javascript">
+          //定义一个点的对象   （x,y）
+		  function Point(x,y){
+		     this.x=x;
+			 this.y=y;
+		  }
+		 //定义一个线的对象， （p1,p2   长度：勾股定理(已知两个点，如何求它的长度)）
+		 function Line( p1,p2){
+		     this.p1=p1;
+			 this.p2=p2;
+			//利用勾股定理求线长       Math.sqrt():求开平方     Math.pow(,2指平方、3指立方):求平方或者立方
+			this.length=Math.sqrt(Math.pow(p1.x-p2.x,2)+Math.pow(p1.y-p2.y,2));  
+		 }
+		 //定义一个形状对象 （由ｎ个点和ｎ条线组成）
+		 function Shape(){
+		   this.points=[];
+		   this.lines=[];
+		   this.init();      //初始化
+		}
+		//初始化，绘制，获取颜色，获取所有的线，获取所有的点，周长，面积。
+		Shape.prototype={
+		  init:function(){      //以获取canvas画布
+			 if((typeof this.context)=='undefined'){       //以防它出错，做下判断
+			     var canvas=document.getElementById('canvas');
+				 this.context=canvas.getContext('2d');
+			}
+		  },
+		  draw:function(){
+		       //利用context来完成绘制    看线和点的位置. ,取出颜色
+			  var ctx=this.context;
+			  ctx.strokeStyle=this.getColor();
+			  ctx.beginPath();
+			  ctx.moveTo(this.points[0].x,this.points[0].y);
+			  for(var i=1;i<this.points.length;i++){
+			     ctx.lineTo(this.points[i].x,this.points[i].y);
+			  }
+			  ctx.closePath();
+			  ctx.stroke();
+		  },
+		  getColor:function(){
+		      //输出颜色   （颜色值随机生成。 Math.random()*255  ）
+			  //‘rgbxxx’
+			  var cs=[];
+			  for(var i=0;i<3;i++){
+			      cs[i]=Math.round(Math.random()*255);       //Math.round():取整（四舍五入）
+				  //Math.random():的取值[0,1)       [255,0,0] 
+			  }
+			  return 'rgb('+cs.join(',')+')';    //使用cs.join(',')把数值连接起来
+		  },
+		  getLines:function(){
+			 //获取所有的点，直接返回所有线
+			 //判断lines是否为空，如果为空，则要判断points是否为空
+			  if(this.lines.length>0){       //不能直接判断this.lines==null;因为前面定义了this.lines=[];如果把this.lines=[]改为this.lines;就可以使用this.lines==null判断
+			      return this.lines;
+			  }
+			 //如果points不为空，则要根据点来生成线
+			 var lines=[];
+			 if(this.points.length<=0){
+			    return lines;
+			 }       //else{}是可以省略掉的
+			  for(var i=0;i<this.points.length;i++){
+			     lines[i]=new Line(this.points[i],(this.points[i+1])?this.points[i+1]:this.points[0]); //绘制线的算法
+			}
+			 this.lines=lines;
+			 return lines;            //
+		  },
+		  getPoints:function(){
+		      return this.points;
+		  },
+		  getParimeter:function(){
+			  //循环    this.lines数组，取出每一条line,再取出它的length值相加。
+			  var lines=this.getLines();
+			  var parim=0;
+			  for(var i=0;i<lines.length;i++){
+				 parim+=lines[i].length;
+			  }
+			  return parim;
+		  },
+		  getArea:function(){
+			 
+		  },
+		}
+		
+		//画三角形
+		function Triangle(p1,p2,p3){
+		    this.points=[p1,p2,p3];
+			/*getArea=function(a,b){
+		        /*return Math.sqrt(Math.abs(x[0]*x[0]+y[0]*y[0]));*/       //Math.sqrt():返回值的平方根   Math.abs():求返回值的绝对值
+			/*	return Math.round(a*b/2); 
+			}
+			var line=[];
+			var a=new line(this.points[i].x1-this.points[i].x2);
+			var b=new line(this.points[i].y1-this.points[i].y2);
+			
+			function s(a,b,c){
+               return Math.sqrt((a+b+c)*(a+b-c)*(a+c-b)*(b+c-a));
+            }*/
+		//	alert(getArea(a,b));         这以上一段代码不要的
+		
+		
+		//在Triangle实现了求面积的方法。。。。
+		this.getArea=function(){
+		    var p=this.getPerimeter();
+			//s半周长
+			var s=p/2;        
+			return Math.sqrt(s*(s-this.lines[0].length)*(s-this.lines[1].length)*(s-this.lies[2].length));         //利用海伦公式求出三角形的面积：利用三角形的三条边求取面积
+			//海伦公式：  Area=s(s-a)(s-b)(s-c);      //s为半周长（即周长/2）
+		}
+			
+		}
+		//继承
+		Triangle.prototype=new Shape();
+		
+		
+		//测试
+		var p1=new Point(200,300);
+		var p2=new Point(300,400);
+		var p3=new Point(100,400);
+		
+		var t1=new Triangle(p1,p2,p3);
+		alert("周长："+t1.getParimeter());
+		alert("颜色："+t1.getColor());
+		alert("所有的点："+t1.getPoints());
+		alert("所有的线："+t1.getLines());
+		
+		t1.draw();
+	    //画正方形
+		function Square(p2,p3,p4,p5){
+	        this.points=[p2,p3,p4,p5];
+		}
+		Square.prototype=new Shape();
+		
+		/*var p2=new Point(300,400);
+		var p3=new Point(100,400);*/
+		var p4=new Point(100,600);
+		var p5=new Point(300,600);
+		
+		var S1=new Square(p2,p3,p4,p5);
+		S1.draw();
+		
+		//画长方形
+		function Rect(p6,p7,p8,p9){
+	        this.points=[p6,p7,p8,p9];
+		}
+		Rect.prototype=new Shape();
+		var p6=new Point(170,510);
+		var p7=new Point(230,510);
+		var p8=new Point(230,600);
+		var p9=new Point(170,600);
+		
+		var R1=new Rect(p6,p7,p8,p9);
+		R1.draw();
+		
+		//画圆形
+		/*function Circular(p10,R){
+		   this.points=[p10,R];
+		}
+		Circular.prototype=new Shape();*/
+		var ctx=canvas.getContext('2d');
+		//开始一个新的绘制路径
+        ctx.beginPath();
+		var circle = {
+        x : 250,    //圆心的x轴坐标值
+        y : 450,    //圆心的y轴坐标值
+        r : 25      //圆的半径
+        };
+    //以canvas中的坐标点(250,450)为圆心，绘制一个半径为25px的圆形      true表示顺时针绘制，false表示逆时针绘制
+        ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2, true);    //acr()方法：绘制弧形/曲线或圆
+    //按照指定的路径绘制弧线
+		ctx.stroke();
+		
+		
+		
+	/*	//画长方形
+		function Rects(a,l,w){
+		   var p1=new point(a.x+l,a.y);
+		   var p2=new point(a.x+l,a.y+w);
+		   var p3=new point(a.x,a.y+w);
+		   this.points=[a,p1,p2,p3];
+		   this.getArea=function(){
+		       return l*w;
+		   }
+		}
+		Rects.prototype=new Shape();
+		var a=new point(170,510);
+		var p1=new point(230,510);
+		var p3=new point(230,600);
+		var p2=new point(230,600);
+		
+		var R2=new Rects(a,p1,p2,p3);
+		R2.draw();
+		
+		
+		//画正方形
+		function Squares(b,l){
+		  var p1=(b+l,b);
+		  var p2=(b,b+l);
+		  var p3=(b+l,b+l);
+		  this.points=[b,p1,p2,p3];
+		  this.getArea=function(){
+		      return l*l;
+		  }
+		}
+		
+		//画正方形的方法二     call实现（多继承）
+		function Square(a,l){
+		   Rects.call=(this,a,l,l);
+		}
+		*/
+		
+      </script>
+   </body>
+ </html>
